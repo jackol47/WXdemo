@@ -1,5 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image, Input, Icon, Button } from '@tarojs/components'
+import One from '../../res/1.png'
+import Two from '../../res/2.png'
 import './index.less'
 
 export default class Index extends Component {
@@ -26,9 +28,9 @@ export default class Index extends Component {
         </View>
 
         <View class='main'>
-          <Image src='../../res/1.png' mode='aspectFit'></Image>
+          <Image src={One} mode='aspectFit'></Image>
           <Input type='text' placeholder='手机号/邮箱'></Input>
-          <Image src='../../res/2.png' mode='aspectFit'></Image>
+          <Image src={Two} mode='aspectFit'></Image>
           <Input type='password' placeholder='请输入密码'></Input>
         </View>
 
