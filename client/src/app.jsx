@@ -10,6 +10,11 @@ import './app.less'
 // }
 
 class App extends Component {
+  componentDidMount () {
+    if (process.env.TARO_ENV === 'weapp') {
+      Taro.cloud.init()
+    }
+  }
 
   config = {
     pages: [
@@ -23,12 +28,6 @@ class App extends Component {
       navigationBarTextStyle: 'black'
     },
     cloud: true
-  }
-
-  componentDidMount () {
-    if (process.env.TARO_ENV === 'weapp') {
-      Taro.cloud.init()
-    }
   }
 
   componentDidShow () {}

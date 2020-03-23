@@ -6,19 +6,9 @@ import Three from '../../res/3.png'
 import './login.less'
 
 export default class Index extends Component {
-  config = {
-    
+  constructor(props) {
+    super(props)
   }
-
-  componentWillMount() {}
-
-  componentDidMount() {}
-
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
 
   render() {
     return (

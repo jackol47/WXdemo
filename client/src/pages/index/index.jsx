@@ -1,5 +1,5 @@
 import Taro , { Component } from '@tarojs/taro';
-import { View, Text , Button, Image} from '@tarojs/components';
+import { View, Text, Image} from '@tarojs/components';
 import One from '../../res/1.jpg'
 import WriteIn from '../../res/luru-xianxing.png'
 import Check from '../../res/chayue.png'
@@ -10,27 +10,20 @@ import './index.less'
 
 
 export default class Index extends Component {
-
-   config = {
-       
+  constructor(props) {
+    super(props)
   }
 
-  state={}
+  turnLoginPage = () => {
+    Taro.navigateTo({ url: '/pages/login/login' });
+  }
 
-  componentWillMount () {}
-  componentDidMount () {} 
-  componentWillReceiveProps (nextProps,nextContext) {} 
-  componentWillUnmount () {} 
-  componentDidShow () {} 
-  componentDidHide () {} 
-  componentDidCatchError () {} 
-  componentDidNotFound () {} 
   render() {
     return (
       <View>
         <Image src={One} mode='aspectFit' class='topImage'></Image>
         <View class='flex'>
-            <View class='flexItem'>
+            <View class='flexItem' onClick={this.turnLoginPage}>
                 <Image src={WriteIn} class='icon'></Image>
                 <Text>档案录入</Text>
             </View>
@@ -51,7 +44,4 @@ export default class Index extends Component {
     );
   }
 
-  
 }
-
-Taro.navigateTo({url: '/pages/login/login'});
