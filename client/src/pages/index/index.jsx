@@ -1,42 +1,57 @@
-import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Image, Input, Icon, Button } from '@tarojs/components'
-import One from '../../res/1.png'
-import Two from '../../res/2.png'
+import Taro , { Component } from '@tarojs/taro';
+import { View, Text , Button, Image} from '@tarojs/components';
+import One from '../../res/1.jpg'
+import WriteIn from '../../res/luru-xianxing.png'
+import Check from '../../res/chayue.png'
+import Type from '../../res/leimupinleifenleileibie.png'
+import Search from '../../res/jiansuo.png'
 import './index.less'
 
+
+
 export default class Index extends Component {
-  config = {
-    navigationBarTitleText: '首页'
+
+   config = {
+       
   }
 
-  componentWillMount() {}
+  state={}
 
-  componentDidMount() {}
-
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
-
+  componentWillMount () {}
+  componentDidMount () {} 
+  componentWillReceiveProps (nextProps,nextContext) {} 
+  componentWillUnmount () {} 
+  componentDidShow () {} 
+  componentDidHide () {} 
+  componentDidCatchError () {} 
+  componentDidNotFound () {} 
   render() {
     return (
       <View>
-        <View class='header'>
-          <Icon></Icon>
-          <Text>登录</Text>
+        <Image src={One} mode='aspectFit' class='topImage'></Image>
+        <View class='flex'>
+            <View class='flexItem'>
+                <Image src={WriteIn} class='icon'></Image>
+                <Text>档案录入</Text>
+            </View>
+            <View class='flexItem'>
+                <Image src={Check} class='icon'></Image>
+                <Text>档案查阅</Text>
+            </View>
+            <View class='flexItem'>
+                <Image src={Type} class='icon'></Image>
+                <Text>档案分类</Text>
+            </View>
+            <View class='flexItem'>
+                <Image src={Search} class='icon'></Image>
+                <Text>档案检索</Text>
+            </View>
         </View>
-
-        <View class='main'>
-          <Image src={One} mode='aspectFit'></Image>
-          <Input type='text' placeholder='手机号/邮箱'></Input>
-          <Image src={Two} mode='aspectFit'></Image>
-          <Input type='password' placeholder='请输入密码'></Input>
-        </View>
-
-        <Button>登录</Button>
-        <Button>注册</Button>
       </View>
-    )
+    );
   }
+
+  
 }
+
+Taro.navigateTo({url: '/pages/login/login'});

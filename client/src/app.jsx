@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import Index from './pages/index'
+import Index from './pages/login/login'
 
 import './app.less'
 
@@ -13,12 +13,13 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/login/login'
     ],
     window: {
+      navigationBarTitleText: '杭州市规划局档案管理系统',
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
     },
     cloud: true
