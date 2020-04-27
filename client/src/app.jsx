@@ -1,6 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import Index from './pages/login/login'
-
+import Index from './pages/index/index'
 import './app.less'
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -19,22 +18,14 @@ class App extends Component {
   config = {
     pages: [
       'pages/index/index',
-      'pages/login/login'
     ],
     window: {
-      navigationBarTitleText: '杭州市规划局档案管理系统',
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTextStyle: 'black'
     },
-    cloud: true
+    cloud: true,
   }
-
-  componentDidShow () {}
-
-  componentDidHide () {}
-
-  componentDidCatchError () {}
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数

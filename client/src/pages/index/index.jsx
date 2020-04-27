@@ -1,47 +1,65 @@
-import Taro , { Component } from '@tarojs/taro';
-import { View, Text, Image} from '@tarojs/components';
-import One from '../../res/1.jpg'
-import WriteIn from '../../res/luru-xianxing.png'
-import Check from '../../res/chayue.png'
-import Type from '../../res/leimupinleifenleileibie.png'
-import Search from '../../res/jiansuo.png'
-import './index.less'
-
-
+import Taro, { Component } from '@tarojs/taro';
+import { View, Text } from '@tarojs/components';
+import { login } from '@/utils/service'
+import Home from '../home/index'
+import './index.less';
 
 export default class Index extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      isShow: true,
+      date: new Date()
+    };
   }
 
-  turnLoginPage = () => {
-    Taro.navigateTo({ url: '/pages/login/login' });
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+    this.tick();
+
+    login()
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  time() {
+    console.log("哈哈哈哈哈哈")
+  }
+
+  renderHome = () => {
+    const { isShow } = this.state;
+    return (
+      <View>
+        {`isShow=${isShow}`}
+      </View>
+    )
   }
 
   render() {
+    const { isShow } = this.state;
     return (
       <View>
-        <Image src={One} mode='aspectFit' class='topImage'></Image>
-        <View class='flex'>
-            <View class='flexItem' onClick={this.turnLoginPage}>
-                <Image src={WriteIn} class='icon'></Image>
-                <Text>档案录入</Text>
-            </View>
-            <View class='flexItem'>
-                <Image src={Check} class='icon'></Image>
-                <Text>档案查阅</Text>
-            </View>
-            <View class='flexItem'>
-                <Image src={Type} class='icon'></Image>
-                <Text>档案分类</Text>
-            </View>
-            <View class='flexItem'>
-                <Image src={Search} class='icon'></Image>
-                <Text>档案检索</Text>
-            </View>
-        </View>
+        <Text>Hello, world!</Text>
+        {isShow && (
+          <View>
+            <View onClick={this.time.bind(this)}>12345</View>
+            <Text>现在的时间是 {this.state.date.toLocaleTimeString()}.</Text>
+          </View>
+        )}
+        {this.renderHome()}
+        <Home
+          isShow={isShow}
+          online={isShow}
+        />
       </View>
     );
   }
-
 }
