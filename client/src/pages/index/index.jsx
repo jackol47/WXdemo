@@ -9,30 +9,13 @@ export default class Index extends Component {
     super(props);
     this.state = {
       isShow: true,
-      date: new Date()
     };
   }
 
   componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000);
-    this.tick();
-
     login()
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
-
-  time() {
-    console.log("哈哈哈哈哈哈")
-  }
 
   renderHome = () => {
     const { isShow } = this.state;
@@ -51,7 +34,6 @@ export default class Index extends Component {
         {isShow && (
           <View>
             <View onClick={this.time.bind(this)}>12345</View>
-            <Text>现在的时间是 {this.state.date.toLocaleTimeString()}.</Text>
           </View>
         )}
         {this.renderHome()}
