@@ -1,29 +1,29 @@
 Arguments: 
-  /Users/chenguanhua/.nvm/versions/node/v12.11.1/bin/node /Users/chenguanhua/.yarn/bin/yarn.js add @/utils/service --silent --no-progress
+  D:\nodejs\node.exe D:\nodejs\node_global\node_modules\yarn\bin\yarn.js add @/img/sw1.jpg --silent --no-progress
 
 PATH: 
-  /Users/chenguanhua/.nvm/versions/node/v12.11.1/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/chenguanhua/github/WXDemo/client/node_modules/.bin:/var/folders/_z/471n7x4j5hg7_rr0f_bf5_sc0000gn/T/yarn--1587711051564-0.2835177281926653:/Users/chenguanhua/github/WXDemo/client/node_modules/.bin:/Users/chenguanhua/.config/yarn/link/node_modules/.bin:/Users/chenguanhua/.nvm/versions/node/v12.11.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/chenguanhua/.nvm/versions/node/v12.11.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/chenguanhua/.nvm/versions/node/v12.11.1/bin/node_modules/npm/bin/node-gyp-bin:/Users/chenguanhua/.yarn/bin:/Users/chenguanhua/.config/yarn/global/node_modules/.bin:/Users/chenguanhua/.nvm/versions/node/v12.11.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  D:\nodejs\node_global\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;D:\workspace\WXdemo\client\node_modules\.bin;D:\nodejs\node_global\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;D:\workspace\WXdemo\client\node_modules\.bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\nodejs\;D:\Git\bin;D:\Git\mingw64\libexec\git-core;D:\Git\mingw64\bin;D:\nodejs\node_global\;D:\Ruby27-x64\bin;C:\Users\22966\AppData\Local\Microsoft\WindowsApps;C:\Users\22966\AppData\Roaming\npm;D:\nodejs\node_global\;;D:\Microsoft VS Code\bin
 
 Yarn version: 
-  1.19.1
+  1.21.1
 
 Node version: 
-  12.11.1
+  12.14.0
 
 Platform: 
-  darwin x64
+  win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@%2futils/service: Not found
-      at Request.params.callback [as _callback] (/Users/chenguanhua/.yarn/lib/cli.js:66926:18)
-      at Request.self.callback (/Users/chenguanhua/.yarn/lib/cli.js:140564:22)
+  Error: https://registry.npmjs.org/@%2fimg/sw1.jpg: Not found
+      at Request.params.callback [as _callback] (D:\nodejs\node_global\node_modules\yarn\lib\cli.js:66947:18)
+      at Request.self.callback (D:\nodejs\node_global\node_modules\yarn\lib\cli.js:140665:22)
       at Request.emit (events.js:210:5)
-      at Request.<anonymous> (/Users/chenguanhua/.yarn/lib/cli.js:141536:10)
+      at Request.<anonymous> (D:\nodejs\node_global\node_modules\yarn\lib\cli.js:141637:10)
       at Request.emit (events.js:210:5)
-      at IncomingMessage.<anonymous> (/Users/chenguanhua/.yarn/lib/cli.js:141458:12)
+      at IncomingMessage.<anonymous> (D:\nodejs\node_global\node_modules\yarn\lib\cli.js:141559:12)
       at Object.onceWrapper (events.js:299:28)
       at IncomingMessage.emit (events.js:215:7)
-      at endReadableNT (_stream_readable.js:1183:12)
+      at endReadableNT (_stream_readable.js:1184:12)
       at processTicksAndRejections (internal/process/task_queues.js:80:21)
 
 npm manifest: 
@@ -48,12 +48,6 @@ npm manifest:
       "@tarojs/components-qa": "1.3.15",
       "@tarojs/router": "1.3.15",
       "@tarojs/taro": "1.3.15",
-      "@tarojs/taro-alipay": "1.3.15",
-      "@tarojs/taro-h5": "1.3.15",
-      "@tarojs/taro-qq": "1.3.15",
-      "@tarojs/taro-quickapp": "1.3.15",
-      "@tarojs/taro-swan": "1.3.15",
-      "@tarojs/taro-tt": "1.3.15",
       "@tarojs/taro-weapp": "1.3.15",
       "nerv-devtools": "^1.5.5",
       "nervjs": "^1.5.5",
@@ -68,6 +62,7 @@ npm manifest:
       "@types/react": "^16.4.6",
       "@types/webpack-env": "^1.13.6",
       "babel-eslint": "^8.2.3",
+      "babel-plugin-transform-runtime": "^6.23.0",
       "babel-plugin-transform-class-properties": "^6.24.1",
       "babel-plugin-transform-decorators-legacy": "^1.3.4",
       "babel-plugin-transform-jsx-stylesheet": "^0.6.5",
@@ -240,16 +235,6 @@ Lockfile:
       value-equal "0.4.0"
       warning "4.0.2"
   
-  "@tarojs/taro-alipay@1.3.15":
-    version "1.3.15"
-    resolved "https://registry.yarnpkg.com/@tarojs/taro-alipay/-/taro-alipay-1.3.15.tgz#8b17b82e6be99d39e4b004f8bff234b5a3df2551"
-    integrity sha512-F2ADODCf9oYR59HHpxtjh/5BRB6c/uhURCibNqswHST2oaiH2aSDCCfe3LS0q6LtVqfCQXJx5tFseMO2lQltmg==
-    dependencies:
-      "@tarojs/taro" "1.3.15"
-      "@tarojs/utils" "1.3.15"
-      lodash "^4.17.10"
-      prop-types "^15.6.1"
-  
   "@tarojs/taro-h5@1.3.15":
     version "1.3.15"
     resolved "https://registry.yarnpkg.com/@tarojs/taro-h5/-/taro-h5-1.3.15.tgz#086437d4c717a2e62c4b3eb5542e1c6974d5abb5"
@@ -260,46 +245,6 @@ Lockfile:
       mobile-detect "^1.4.2"
       raf "^3.4.1"
       whatwg-fetch "^2.0.4"
-  
-  "@tarojs/taro-qq@1.3.15":
-    version "1.3.15"
-    resolved "https://registry.yarnpkg.com/@tarojs/taro-qq/-/taro-qq-1.3.15.tgz#a69e9b24521d56b9828090b05320bd05d64d7e02"
-    integrity sha512-Q1HlwYxP08BN5vDcloSXhEJYHFiqK8EeT6X39IF3EXSXafS5+29xZ2G0ETSZ/kNSIFy+uYHr1OQklAg+IXZHqQ==
-    dependencies:
-      "@tarojs/taro" "1.3.15"
-      "@tarojs/utils" "1.3.15"
-      lodash "^4.17.10"
-      prop-types "^15.6.1"
-  
-  "@tarojs/taro-quickapp@1.3.15":
-    version "1.3.15"
-    resolved "https://registry.yarnpkg.com/@tarojs/taro-quickapp/-/taro-quickapp-1.3.15.tgz#7660c3b0abdc54e14e9f7764850bf15c6e612989"
-    integrity sha512-Nau6bLa9oc0qqm904M9PIB4RTxXfHlRnPwjAoBz91h8cgZ45qnDIpetqf5NctKzAv0B+T5/BxowV2UcDUIb1pQ==
-    dependencies:
-      "@tarojs/taro" "1.3.15"
-      "@tarojs/utils" "1.3.15"
-      lodash "^4.17.10"
-      prop-types "^15.6.1"
-  
-  "@tarojs/taro-swan@1.3.15":
-    version "1.3.15"
-    resolved "https://registry.yarnpkg.com/@tarojs/taro-swan/-/taro-swan-1.3.15.tgz#dd0735552059080c01f7ccb05b68aa28e45bfb0e"
-    integrity sha512-sTAdK6NMdGSi9U4H/ExvQaXoR7bDNLCk759Wk3HUlb19ysu1D3guUD5u7kMkiL1UAbZTCVRoz0PnIS1daLf6hQ==
-    dependencies:
-      "@tarojs/taro" "1.3.15"
-      "@tarojs/utils" "1.3.15"
-      lodash "^4.17.10"
-      prop-types "^15.6.1"
-  
-  "@tarojs/taro-tt@1.3.15":
-    version "1.3.15"
-    resolved "https://registry.yarnpkg.com/@tarojs/taro-tt/-/taro-tt-1.3.15.tgz#e3fe1a5b6db72d871f32c7c34531fa009f8f5324"
-    integrity sha512-P6CdvySi4NH/zZuzGxeEn/STlZKcmQGXxO0AuL9RXbvHjvi/4nZhXRcRa1t5co+C6yHCC8oWiW/UrG0gVA+A8Q==
-    dependencies:
-      "@tarojs/taro" "1.3.15"
-      "@tarojs/utils" "1.3.15"
-      lodash "^4.17.10"
-      prop-types "^15.6.1"
   
   "@tarojs/taro-weapp@1.3.15":
     version "1.3.15"
@@ -1368,6 +1313,13 @@ Lockfile:
     integrity sha1-4HA2lvveJ/Cj78rPi03KL3s6jy8=
     dependencies:
       regenerator-transform "^0.10.0"
+  
+  babel-plugin-transform-runtime@^6.23.0:
+    version "6.23.0"
+    resolved "https://registry.yarnpkg.com/babel-plugin-transform-runtime/-/babel-plugin-transform-runtime-6.23.0.tgz#88490d446502ea9b8e7efb0fe09ec4d99479b1ee"
+    integrity sha1-iEkNRGUC6puOfvsP4J7E2ZR5se4=
+    dependencies:
+      babel-runtime "^6.22.0"
   
   babel-plugin-transform-strict-mode@^6.24.1:
     version "6.24.1"

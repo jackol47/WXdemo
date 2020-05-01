@@ -1,64 +1,64 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Text } from '@tarojs/components';
+import { View, Text, Swiper, SwiperItem, Image, Button } from '@tarojs/components';
 import { login } from '@/utils/service'
+import SwOne from '@/img/sw1.jpg'
+import SwTwo from '@/img/sw2.jpg'
+import SwThree from '@/img/sw3.jpg'
+import Order from '@/img/order.png'
+import Integral from '@/img/integral.png'
 import Home from '../home/index'
+
 import './index.less';
 
 export default class Index extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isShow: true,
-      date: new Date()
-    };
+
+  async componentDidMount() {
+    const { uid } = await login()
+    console.log("uid: ", uid)
+    Taro.setStorageSync('uid', uid)
   }
 
-  componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000);
-    this.tick();
-
-    login()
+  turnToMenuPage = () =>{
+    Taro.navigateTo({
+      url: '/pages/menu/menu'
+    })
   }
-
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
-
-  time() {
-    console.log("哈哈哈哈哈哈")
-  }
-
-  renderHome = () => {
-    const { isShow } = this.state;
-    return (
-      <View>
-        {`isShow=${isShow}`}
-      </View>
-    )
-  }
-
+  
   render() {
-    const { isShow } = this.state;
     return (
       <View>
-        <Text>Hello, world!</Text>
-        {isShow && (
-          <View>
-            <View onClick={this.time.bind(this)}>12345</View>
-            <Text>现在的时间是 {this.state.date.toLocaleTimeString()}.</Text>
+        <Swiper
+          className='swiper'
+          indicatorColor='#999'
+          indicatorActiveColor='#333'
+          circular
+          indicatorDots
+          autoplay>
+          <SwiperItem>
+            <Image src={SwOne} style='width: 100%' />
+          </SwiperItem>
+          <SwiperItem>
+            <Image src={SwTwo} style='width: 100%' />
+          </SwiperItem>
+          <SwiperItem>
+            <Image src={SwThree} style='width: 100%' />
+          </SwiperItem>
+        </Swiper>
+
+        <Button className='startOrder' onClick={this.turnToMenuPage}>
+          开始点餐
+        </Button>
+
+        <View className='content'>
+          <View className='contentItem'>
+            <Image src={Integral} style='width:50px;height: 50px' />
+            <Text>积分商城</Text>
           </View>
-        )}
-        {this.renderHome()}
-        <Home
-          isShow={isShow}
-          online={isShow}
-        />
+          <View className='contentItem'>
+            <Image src={Order} style='width:50px;height: 50px' />
+            <Text>历史订单</Text>
+          </View>
+        </View>
       </View>
     );
   }

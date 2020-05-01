@@ -12,6 +12,7 @@ const config = {
   sourceRoot: 'src',
   outputRoot: 'dist',
   alias: {
+    '@/img': path.resolve(__dirname, '..', 'src/res'),
     '@/utils': path.resolve(__dirname, '..', 'src/utils')
   },
   plugins: {

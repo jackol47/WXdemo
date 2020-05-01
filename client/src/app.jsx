@@ -9,6 +9,8 @@ import './app.less'
 // }
 
 class App extends Component {
+  
+
   componentDidMount () {
     if (process.env.TARO_ENV === 'weapp') {
       Taro.cloud.init()
@@ -18,6 +20,8 @@ class App extends Component {
   config = {
     pages: [
       'pages/index/index',
+      'pages/menu/menu',
+      'pages/recommend/recommend',
     ],
     window: {
       backgroundTextStyle: 'light',
