@@ -1,14 +1,22 @@
 const cloud = require('wx-server-sdk');
+
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
 });
 
+<<<<<<< HEAD
 const db = cloud.database();
 const _ = db.command;
 const user = db.collection('user');
+=======
+const db = cloud.database()
+
+const user = db.collection('user')
+>>>>>>> 6e6fb92e38417c3d6d91ee1b3b56ed2ee43aa293
 
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext(context);
+  const { name } = event
   const { OPENID } = wxContext;
   
   if (OPENID) {
@@ -27,5 +35,10 @@ exports.main = async (event, context) => {
     }
     return { success: true, data: {uid: OPENID} } 
   }
+<<<<<<< HEAD
   return { success: false, errMsg: '获取uid失败' }
 }
+=======
+  return { success: false, name };
+};
+>>>>>>> 6e6fb92e38417c3d6d91ee1b3b56ed2ee43aa293

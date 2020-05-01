@@ -1,10 +1,17 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Text } from '@tarojs/components';
+import { View, Text, Swiper, SwiperItem, Image, Button } from '@tarojs/components';
 import { login } from '@/utils/service'
+import SwOne from '@/img/sw1.jpg'
+import SwTwo from '@/img/sw2.jpg'
+import SwThree from '@/img/sw3.jpg'
+import Order from '@/img/order.png'
+import Integral from '@/img/integral.png'
 import Home from '../home/index'
+
 import './index.less';
 
 export default class Index extends Component {
+<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {
@@ -16,31 +23,63 @@ export default class Index extends Component {
     login()
   }
 
+=======
 
-  renderHome = () => {
-    const { isShow } = this.state;
-    return (
-      <View>
-        {`isShow=${isShow}`}
-      </View>
-    )
+  async componentDidMount() {
+    const { uid } = await login()
+    console.log("uid: ", uid)
+    Taro.setStorageSync('uid', uid)
   }
+>>>>>>> 6e6fb92e38417c3d6d91ee1b3b56ed2ee43aa293
 
+  turnToMenuPage = () =>{
+    Taro.navigateTo({
+      url: '/pages/menu/menu'
+    })
+  }
+  
   render() {
-    const { isShow } = this.state;
     return (
       <View>
+<<<<<<< HEAD
         <Text>Hello, world!</Text>
         {isShow && (
           <View>
             <View onClick={this.time.bind(this)}>12345</View>
+=======
+        <Swiper
+          className='swiper'
+          indicatorColor='#999'
+          indicatorActiveColor='#333'
+          circular
+          indicatorDots
+          autoplay>
+          <SwiperItem>
+            <Image src={SwOne} style='width: 100%' />
+          </SwiperItem>
+          <SwiperItem>
+            <Image src={SwTwo} style='width: 100%' />
+          </SwiperItem>
+          <SwiperItem>
+            <Image src={SwThree} style='width: 100%' />
+          </SwiperItem>
+        </Swiper>
+
+        <Button className='startOrder' onClick={this.turnToMenuPage}>
+          开始点餐
+        </Button>
+
+        <View className='content'>
+          <View className='contentItem'>
+            <Image src={Integral} style='width:50px;height: 50px' />
+            <Text>积分商城</Text>
           </View>
-        )}
-        {this.renderHome()}
-        <Home
-          isShow={isShow}
-          online={isShow}
-        />
+          <View className='contentItem'>
+            <Image src={Order} style='width:50px;height: 50px' />
+            <Text>历史订单</Text>
+>>>>>>> 6e6fb92e38417c3d6d91ee1b3b56ed2ee43aa293
+          </View>
+        </View>
       </View>
     );
   }
