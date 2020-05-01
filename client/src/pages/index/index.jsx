@@ -11,11 +11,9 @@ import Home from '../home/index'
 import './index.less';
 
 export default class Index extends Component {
-<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {
-      isShow: true,
     };
   }
 
@@ -23,14 +21,12 @@ export default class Index extends Component {
     login()
   }
 
-=======
 
   async componentDidMount() {
     const { uid } = await login()
     console.log("uid: ", uid)
     Taro.setStorageSync('uid', uid)
   }
->>>>>>> 6e6fb92e38417c3d6d91ee1b3b56ed2ee43aa293
 
   turnToMenuPage = () =>{
     Taro.navigateTo({
@@ -41,12 +37,6 @@ export default class Index extends Component {
   render() {
     return (
       <View>
-<<<<<<< HEAD
-        <Text>Hello, world!</Text>
-        {isShow && (
-          <View>
-            <View onClick={this.time.bind(this)}>12345</View>
-=======
         <Swiper
           className='swiper'
           indicatorColor='#999'
@@ -77,7 +67,6 @@ export default class Index extends Component {
           <View className='contentItem'>
             <Image src={Order} style='width:50px;height: 50px' />
             <Text>历史订单</Text>
->>>>>>> 6e6fb92e38417c3d6d91ee1b3b56ed2ee43aa293
           </View>
         </View>
       </View>
