@@ -10,7 +10,6 @@ const user = db.collection('user');
 
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext(context);
-  const { name } = event
   const { OPENID } = wxContext;
   
   if (OPENID) {

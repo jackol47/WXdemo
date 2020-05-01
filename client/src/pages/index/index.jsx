@@ -1,13 +1,11 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Swiper, SwiperItem, Image, Button } from '@tarojs/components';
-import { login } from '@/utils/service'
+import { login, getDish } from '@/utils/service'
 import SwOne from '@/img/sw1.jpg'
 import SwTwo from '@/img/sw2.jpg'
 import SwThree from '@/img/sw3.jpg'
 import Order from '@/img/order.png'
 import Integral from '@/img/integral.png'
-import Home from '../home/index'
-
 import './index.less';
 
 export default class Index extends Component {
@@ -16,11 +14,6 @@ export default class Index extends Component {
     this.state = {
     };
   }
-
-  componentDidMount() {
-    login()
-  }
-
 
   async componentDidMount() {
     const { uid } = await login()
