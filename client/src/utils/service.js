@@ -1,14 +1,28 @@
-import requset from './request'
+import { request } from './request'
 
 export function login() {
-  return requset({name: 'ty-getOpenId'});
+  return request({name: 'ty-getOpenId'});
 }
 
-export function sum() {
+export function getOrderForm() {
+  return request({
+    name: 'ty-getOrderList'
+  })
+}
+
+export function submitOrder(menuIdList, note) {
   const param = {
-    name: 'sum'
+    name: 'ty-submitOrder',
+    data: {
+      menuIdList,
+      note
+    }
   }
-  return requset(param)
+  return request(param)
 }
 
-export default { login };
+export function getDish() {
+  return request({name: 'ty-getDish'})
+}
+
+export default { login, getOrderForm, submitOrder, getDish };
