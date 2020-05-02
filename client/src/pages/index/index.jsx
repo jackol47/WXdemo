@@ -30,7 +30,7 @@ export default class Index extends Component {
 
   turnToMenuPage = () =>{
     Taro.navigateTo({
-      url: '/pages/menu/menu'
+      url: '/pages/menu/menu?id=1'
     })
   }
   

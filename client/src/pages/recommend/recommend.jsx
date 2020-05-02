@@ -1,36 +1,147 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Text, Button } from '@tarojs/components';
-import { AtList, AtListItem } from "taro-ui"
-
+import { View, Text, ScrollView, Image } from '@tarojs/components';
+import One from '@/img/card.jpg'
+// import { AtList, AtListItem } from "taro-ui"
+import Food from '@/img/shiwu.jpg'
+import Dish from '@/components/dish/dish'
+import Add from '@/components/add/add'
+import './recommend.less'
 
 
 export default class Recommend extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 1,
+    }
+  }
+
+  onDecrease = (newCount) => { 
+    newCount--
+    this.setState({count: newCount})
+  }
+
+  onIncrease = (newCount) => { 
+    newCount++
+    this.setState({count: newCount})
+  }
+
+  backToMenuPage = () =>{
+    Taro.navigateBack({
+      delta: 1
+    })
+  }
+
+  turnToOrderConfirmPage = () => {
+    Taro.navigateTo({
+      url: '/pages/orderConfirm/orderConfirm'
+    })
+  }
+
   render() {
-    
+
+    const { count } = this.state
+
     return (
-      <View className='recBg'>
-        <View className='recommend'>
-          <Text>您可能还需要</Text>
-          <AtList>
-            <AtListItem
-              title='标题文字'
-              arrow='right'
-              thumb='https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png'
-            />
-            <AtListItem
-              title='标题文字'
-              note='描述信息'
-              arrow='right'
-              thumb='http://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
-            />
-            <AtListItem
-              title='标题文字'
-              note='描述信息'
-              extraText='详细信息'
-              arrow='right'
-              thumb='http://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png'
-            />
-          </AtList>
+      <View>
+        <ScrollView style='height: 1100rpx' scrollY>
+          <View className='selectedMenu'>
+            <Text className='selectedTitle'>已选以下菜品</Text>
+            {/* {menuList.map(item => {
+              return item && {<View></View>}
+            })} */}
+            {<View className='dishWrap'>
+              <Dish
+                img={Food}
+                name='asduhaukd'
+                price={100}
+              />
+              <Add
+                count={count}
+                onDecrease={() => this.onDecrease(count)}
+                onIncrease={() => this.onIncrease(count)}
+              />
+            </View>}
+            <View className='dishWrap'>
+              <Dish
+                img={Food}
+                name='asduhaukd'
+                price={100}
+              />
+              <Add
+                count={count}
+                onDecrease={() => this.onDecrease(count)}
+                onIncrease={() => this.onIncrease(count)}
+              />
+            </View>
+          </View>
+          <View className='recommend'>
+            <Text className='recTitle'>为您推荐</Text>
+            <View className='reclist'>
+              <View className='recItem'>
+                <Image src={One} className='recImg' />
+                <View style='font-size: 24rpx'>菜名</View>
+                <View style='font-size: 24rpx'>价格</View>
+                <View className='addToCart'>加入购物车</View>
+              </View>
+              <View className='recItem'>
+                <Image src={One} className='recImg' />
+                <View style='font-size: 24rpx'>菜名</View>
+                <View style='font-size: 24rpx'>价格</View>
+                <View className='addToCart'>加入购物车</View>
+              </View>
+              <View className='recItem'>
+                <Image src={One} className='recImg' />
+                <View style='font-size: 24rpx'>菜名</View>
+                <View style='font-size: 24rpx'>价格</View>
+                <View className='addToCart'>加入购物车</View>
+              </View>
+              <View className='recItem'>
+                <Image src={One} className='recImg' />
+                <View style='font-size: 24rpx'>菜名</View>
+                <View style='font-size: 24rpx'>价格</View>
+                <View className='addToCart'>加入购物车</View>
+              </View>
+              <View className='recItem'>
+                <Image src={One} className='recImg' />
+                <View style='font-size: 24rpx'>菜名</View>
+                <View style='font-size: 24rpx'>价格</View>
+                <View className='addToCart'>加入购物车</View>
+              </View>
+              <View className='recItem'>
+                <Image src={One} className='recImg' />
+                <View style='font-size: 24rpx'>菜名</View>
+                <View style='font-size: 24rpx'>价格</View>
+                <View className='addToCart'>加入购物车</View>
+              </View>
+              <View className='recItem'>
+                <Image src={One} className='recImg' />
+                <View style='font-size: 24rpx'>菜名</View>
+                <View style='font-size: 24rpx'>价格</View>
+                <View className='addToCart'>加入购物车</View>
+              </View>
+              <View className='recItem'>
+                <Image src={One} className='recImg' />
+                <View style='font-size: 24rpx'>菜名</View>
+                <View style='font-size: 24rpx'>价格</View>
+                <View className='addToCart'>加入购物车</View>
+              </View>
+              <View className='recItem'>
+                <Image src={One} className='recImg' />
+                <View style='font-size: 24rpx'>菜名</View>
+                <View style='font-size: 24rpx'>价格</View>
+                <View className='addToCart'>加入购物车</View>
+              </View>
+            </View>
+          </View>
+
+        </ScrollView>
+        <View className='recBottom'>
+          <Text className='total'>100元</Text>
+          <View className='btnWrap'>
+            <View className='btnItem' style='background-color: orange' onClick={this.backToMenuPage}>继续点菜</View>
+            <View className='btnItem' style='background-color: red' onClick={this.turnToOrderConfirmPage}>去下单</View>
+          </View>
         </View>
       </View>
     );

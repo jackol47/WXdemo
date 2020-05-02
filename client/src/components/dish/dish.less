@@ -1,6 +1,34 @@
+page{
+    background-color: #eee;
+}
+
+
 .dishItem{
     display: flex;
+    height: 190px;
+    background-color: #fff;
+    align-items: center;
+    padding: 0 20px;
+
+    &_item {
+      
+      font-size: 36px;
+
+      &-price {
+        font-size: 28px;
+      }
+    }
+}
+
+.dishImg{
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+}
+
+.dishInner {
+    display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-content: space-around;
+    justify-content: space-between;
+    height: 150px;
 }

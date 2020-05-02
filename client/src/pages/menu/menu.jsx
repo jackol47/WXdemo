@@ -8,7 +8,7 @@ export default class Menu extends Component {
 
   turnToRecommendPage = () => {
     Taro.navigateTo({
-      url: '/pages/recommend/recommend'
+      url: '/pages/recommend/recommend?id=1'
     })
   }
 
