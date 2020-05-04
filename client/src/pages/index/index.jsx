@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Swiper, SwiperItem, Image, Button } from '@tarojs/components';
-import { login, getDish } from '@/utils/service'
+import { login } from '@/utils/service'
 import SwOne from '@/img/sw1.jpg'
 import SwTwo from '@/img/sw2.jpg'
 import SwThree from '@/img/sw3.jpg'
@@ -15,7 +15,36 @@ export default class Index extends Component {
     };
   }
 
+  // Page({
+  //   data: {
+  //     canIUse: Taro.canIUse('Button.open-type.getUserInfo')
+  //   },
+  //   onLoad: function () {
+  //     Taro.getSetting({
+  //       success(res) {
+  //         if(!res.authSetting['scope.userInfo']) {
+  //           Taro.authorize({
+  //             scope: 'scope.userInfo',
+              
+  //             success (){
+  //               Taro.getUserInfo()
+  //             }
+  //           })
+  //         } else {
+  //           Taro.getUserInfo({
+  //             success: function() {
+  //               console.log(res.userInfo)
+  //             }
+  //           })
+  //         }
+  //       }
+  //     })
+  //   }
+  // })
+
   async componentDidMount() {
+    
+    
     const { uid } = await login()
     console.log("uid: ", uid)
     Taro.setStorageSync('uid', uid)
@@ -26,17 +55,26 @@ export default class Index extends Component {
       url: '/pages/menu/menu?id=1'
     })
   }
+
+  turnToIntegralPage = () =>{
+    Taro.navigateTo({
+      url: '/pages/integral/integral'
+    })
+  }
   
   render() {
     return (
+      
       <View>
+        {/* <Button open-type='getUserInfo'>授权登录</Button> */}
         <Swiper
           className='swiper'
           indicatorColor='#999'
           indicatorActiveColor='#333'
           circular
           indicatorDots
-          autoplay>
+          autoplay
+        >
           <SwiperItem>
             <Image src={SwOne} style='width: 100%' />
           </SwiperItem>
@@ -53,7 +91,7 @@ export default class Index extends Component {
         </Button>
 
         <View className='content'>
-          <View className='contentItem'>
+          <View className='contentItem' onClick={this.turnToIntegralPage}>
             <Image src={Integral} style='width:50px;height: 50px' />
             <Text>积分商城</Text>
           </View>

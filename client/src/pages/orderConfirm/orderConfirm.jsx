@@ -1,7 +1,8 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, ScrollView, Button } from '@tarojs/components';
-import One from '@/img/card.jpg'
 import { AtList, AtListItem, AtFloatLayout, AtTextarea } from "taro-ui"
+import { getDish, submitOrder } from '@/utils/service'
+import OrderList from '@/components/orderList/orderList'
 
 import './orderConfirm.less'
 
@@ -11,36 +12,36 @@ export default class OrderConfirm extends Component {
     isOpen: false
   }
 
-  onOpenClick = () => {
-    this.setState(pre => ({ isOpen: !pre.isOpen}))
+  async componentDidMount() {
+
+    const { dishList }= await getDish()
+    let result = []
+    result.push({dishId: dishList[0].dish_id, count: 1 })
+    
+    // this.submit(result, '多加la')
   }
 
-  
-  render() {
+  onOpenClick = () => {
+    this.setState(pre => ({ isOpen: !pre.isOpen }))
+  }
 
+  submit = (menuIdLsit, note) => {
+    submitOrder(menuIdLsit, note)
+    Taro.navigateTo({
+      url: '/pages/success/success'
+    })
+  }
+
+
+
+
+  render() {
     return (
       <View>
         <ScrollView style='height: 1100rpx' scrollY>
           <Text className='orderedTitle'>已点菜品</Text>
           <AtList>
-            <AtListItem
-              title='鲜肉蒸饺'
-              thumb={One}
-              note={6 + '元'}
-              extraText='x1'
-            />
-            <AtListItem
-              title='鲜肉蒸饺'
-              thumb={One}
-              note={6 + '元'}
-              extraText='x1'
-            />
-            <AtListItem
-              title='鲜肉蒸饺'
-              thumb={One}
-              note={6 + '元'}
-              extraText='x1'
-            />
+            <OrderList />
             <AtListItem className='note'
               title='备注'
               arrow='right'
@@ -52,7 +53,7 @@ export default class OrderConfirm extends Component {
         <View className='recBottom'>
           <Text className='total'>100元</Text>
           <View className='btnWrap'>
-            <View className='btnItem' style='background-color: orangered' onClick={this.turnToOrderConfirmPage}>提交订单</View>
+            <View className='btnItem' style='background-color: orangered' onClick={this.submit}>提交订单</View>
           </View>
         </View>
 
@@ -61,7 +62,8 @@ export default class OrderConfirm extends Component {
             count={false}
             value={this.state.value}
             maxLength={200}
-            height={300} />
+            height={300} 
+          />
           <Button className='confirm' onClick={this.onOpenClick}>
             确定
         </Button>

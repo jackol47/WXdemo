@@ -48,6 +48,27 @@
 					"id": -1,
 					"name": "pages/orderConfirm/orderConfirm",
 					"pathName": "pages/orderConfirm/orderConfirm",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/success/success",
+					"pathName": "pages/success/success",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderDetails/orderDetails",
+					"pathName": "pages/orderDetails/orderDetails",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/integral/integral",
+					"pathName": "pages/integral/integral",
 					"scene": null
 				}
 			]
