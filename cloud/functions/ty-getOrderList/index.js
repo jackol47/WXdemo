@@ -20,6 +20,7 @@ exports.main = async (event, context) => {
     order['menuList'] = item.menuList;
     order['orderId'] = item.orderId;
     order['note'] = item.note;
+    order['sumPrice'] = item.sumPrice
 
     orderList.push(order);
   });
