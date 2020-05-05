@@ -7,8 +7,8 @@ const _ = db.command;
 const orderForm = db.collection('orderForm');
 
 exports.main = async (event, context) => {
-  const wxContent = cloud.getWXContext(context)
-  const { OPENID } = wxContent;
+  const wxContext = cloud.getWXContext(context)
+  const { OPENID } = wxContext;
   const { data } = await orderForm.where({ uid: _.eq(OPENID) }).get();
   let orderList = [];
   if (!Array.isArray(data))

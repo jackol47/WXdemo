@@ -133,10 +133,10 @@
   dependencies:
     less "^3.0.4"
 
-"@tarojs/plugin-sass@1.3.15":
-  version "1.3.15"
-  resolved "https://registry.yarnpkg.com/@tarojs/plugin-sass/-/plugin-sass-1.3.15.tgz#3341abf09c678cf0522648bbebd3a9f03254024c"
-  integrity sha512-7kiecZIY2ImqXuvTFTYZlpBjvbjcgS4Psh2EGxScf6kYgd2uyK4cnhYjjtYCUPkCPVhLbJARg/69f3JbrSTbFQ==
+"@tarojs/plugin-sass@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@tarojs/plugin-sass/-/plugin-sass-2.2.2.tgz#dbb8304524ab42adae0a5d9006ca2b72381f1de5"
+  integrity sha512-o2YmG5Qc+bPA4yAzfBrlkAx2vtNUzGiFFZvZip88EP79zYDbf4bpSDqC7l5ShS9UX7M3+29nLA/y8kKN1Fdm2A==
   dependencies:
     node-sass "^4.12.0"
     scss-bundle "^2.5.1"
