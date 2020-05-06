@@ -1,13 +1,13 @@
 import Taro , { Component } from '@tarojs/taro';
 import PropTypes from 'prop-types'
 import { View, Text, Image} from '@tarojs/components';
-import Food from '@/img/shiwu.jpg'
+// import Food from '@/img/dish22.jpg'
 
 import './dish.less';
 
 class Dish extends Component {
   static defaultProps = {
-    img: Food,
+    img: '',
     name: '',
     price: 0,
   }

@@ -15,6 +15,7 @@ export default class Index extends Component {
     };
   }
 
+  // 想要用户在加载页面之前首先授权登录，可是不会写
   // Page({
   //   data: {
   //     canIUse: Taro.canIUse('Button.open-type.getUserInfo')

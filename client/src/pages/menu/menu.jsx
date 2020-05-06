@@ -12,7 +12,8 @@ export default class Menu extends Component {
     super(...arguments)
     this.state = {
       current: 0,
-      dishList: []
+      dishList: [],
+      cartList: []
     }
   }
 
@@ -38,9 +39,10 @@ export default class Menu extends Component {
   
 
   render() {
-    const { dishList } = this.state
+    const { dishList, cartList } = this.state
     console.log('dishList: ', dishList);
-
+    console.log('cartList', cartList);
+    
     return (
       <View>
         <AtTabs
@@ -67,6 +69,8 @@ export default class Menu extends Component {
                       <DishItem
                         name={item.name}
                         price={item.price}
+                        img={item.img}
+                        cartList={cartList}
                       />
   
                     }
@@ -82,10 +86,11 @@ export default class Menu extends Component {
                 return (
                   <View key={index}>
                     {
-                      item.type === 'fry' &&
+                      item.type === 'seafood' &&
                       <DishItem
                         name={item.name}
                         price={item.price}
+                        img={item.img}
                       />
   
                     }
@@ -101,10 +106,11 @@ export default class Menu extends Component {
                 return (
                   <View key={index}>
                     {
-                      item.type === 'fry' &&
+                      item.type === 'poach' &&
                       <DishItem
                         name={item.name}
                         price={item.price}
+                        img={item.img}
                       />
   
                     }
@@ -120,10 +126,11 @@ export default class Menu extends Component {
                 return (
                   <View key={index}>
                     {
-                      item.type === 'fry' &&
+                      item.type === 'soup' &&
                       <DishItem
                         name={item.name}
                         price={item.price}
+                        img={item.img}
                       />
   
                     }

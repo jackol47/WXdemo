@@ -8,12 +8,15 @@ class DishItem extends Component {
     static defaultProps = {
         name: '',
         price: 0,
+        img: '',
+        cartList: []
     }
 
     state = {
         count: 0,
         isShow: false
     }
+
 
     onDecrease = (newCount) => { 
         newCount--
@@ -34,12 +37,14 @@ class DishItem extends Component {
     
   render() {
       const { isShow, count } = this.state
-      const { name, price } = this.props
+      const { name, price, img } = this.props
+      
     return (
       <View style='position:relative'>
         <Dish 
           name={name}
           price={price}
+          img={img}
         />
         <Add 
           isShow={isShow}
