@@ -21,6 +21,13 @@ app.jsx 全局入口文件
 
 package.json 配置依赖文件
 
+<!-- 添加自动生成页面模板 -->
+(yarn || npm run) creatPage 页面名 生成标识(p || c) (指定文件夹下添加: 只包含pages里的文件)
+
+示例：
+  npm run creatPage homes p Home;
+  yarn creatPage homes p Home;
 
 
+生成的文件指定在: ./src/pages 下
 

@@ -15,6 +15,7 @@ export default class Index extends Component {
     };
   }
 
+<<<<<<< HEAD
   // 想要用户在加载页面之前首先授权登录，可是不会写
   // Page({
   //   data: {
@@ -43,9 +44,9 @@ export default class Index extends Component {
   //   }
   // })
 
+=======
+>>>>>>> 1b50dec0f9dea5064edd21f132d3d3de97aca0fb
   async componentDidMount() {
-    
-    
     const { uid } = await login()
     console.log("uid: ", uid)
     Taro.setStorageSync('uid', uid)
@@ -62,10 +63,10 @@ export default class Index extends Component {
       url: '/pages/integral/integral'
     })
   }
-  
+
   render() {
     return (
-      
+
       <View>
         {/* <Button open-type='getUserInfo'>授权登录</Button> */}
         <Swiper
