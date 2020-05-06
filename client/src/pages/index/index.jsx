@@ -15,36 +15,7 @@ export default class Index extends Component {
     };
   }
 
-  // Page({
-  //   data: {
-  //     canIUse: Taro.canIUse('Button.open-type.getUserInfo')
-  //   },
-  //   onLoad: function () {
-  //     Taro.getSetting({
-  //       success(res) {
-  //         if(!res.authSetting['scope.userInfo']) {
-  //           Taro.authorize({
-  //             scope: 'scope.userInfo',
-              
-  //             success (){
-  //               Taro.getUserInfo()
-  //             }
-  //           })
-  //         } else {
-  //           Taro.getUserInfo({
-  //             success: function() {
-  //               console.log(res.userInfo)
-  //             }
-  //           })
-  //         }
-  //       }
-  //     })
-  //   }
-  // })
-
   async componentDidMount() {
-    
-    
     const { uid } = await login()
     console.log("uid: ", uid)
     Taro.setStorageSync('uid', uid)
@@ -61,10 +32,10 @@ export default class Index extends Component {
       url: '/pages/integral/integral'
     })
   }
-  
+
   render() {
     return (
-      
+
       <View>
         {/* <Button open-type='getUserInfo'>授权登录</Button> */}
         <Swiper

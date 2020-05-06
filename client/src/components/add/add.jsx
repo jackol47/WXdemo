@@ -7,17 +7,18 @@ import './add.less'
 class Add extends Component {
   static defaultProps = {
     count: 0,
+    isShow: false,
     onDecrease: ()=>{},
     onIncrease: ()=>{}
   }
 
   render() {
-    const { count, onDecrease, onIncrease } = this.props
+    const { count, isShow, onDecrease, onIncrease } = this.props
 
     return (
       <View className='addBtn'>
-        <View className='btn' onClick={onDecrease}>-</View>
-        <Text className='quantity'>{count}</Text>
+        { isShow && <View className='btn' onClick={onDecrease}>-</View> }
+        { isShow && <Text className='quantity'>{count}</Text>}
         <View className='btn' onClick={onIncrease}>+</View>
       </View>
     );
