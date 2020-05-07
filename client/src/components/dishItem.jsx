@@ -10,18 +10,20 @@ class DishItem extends Component {
         price: 0,
         img: '',
         cartList: [],
-        dishId: ''
+        dishId: '',
+        count: 0,
     }
 
     state = {
-        count: 0,
+        
         isShow: false
     }
 
 
     onDecrease = (newCount) => { 
         newCount--
-        this.setState({count: newCount})
+        // this.setState({count: newCount})
+        this.props.count = newCount
         if(newCount === 0){
           this.setState({ isShow: false })
           let index = this.props.cartList.findIndex(item => item.dishId === this.props.dishId)
@@ -35,7 +37,8 @@ class DishItem extends Component {
     
       onIncrease = (newCount) => { 
         newCount++
-        this.setState({count: newCount})
+        // this.setState({count: newCount})
+        this.props.count = newCount
         if(newCount > 0){
           this.setState({ isShow: true })
           this.addToCart(newCount)
@@ -46,9 +49,8 @@ class DishItem extends Component {
   
   addToCart = (newCount) => {
     if(this.props.cartList.some( item => item.dishId === this.props.dishId)){
-      this.props.cartList.map( item => {
-        item.count = newCount
-      })
+      let current = this.props.cartList.findIndex(item => item.dishId === this.props.dishId)
+      this.props.cartList[current].count = newCount
     } else {
       this.props.cartList.push({
         dishId: this.props.dishId,
@@ -61,8 +63,8 @@ class DishItem extends Component {
   }    
     
   render() {
-      const { isShow, count } = this.state
-      const { name, price, img } = this.props
+      const { isShow } = this.state
+      const { name, price, img, count } = this.props
       
     return (
       <View style='position:relative'>

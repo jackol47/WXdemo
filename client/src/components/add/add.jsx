@@ -7,7 +7,7 @@ import './add.less'
 class Add extends Component {
   static defaultProps = {
     count: 0,
-    isShow: false,
+    isShow: true,
     onDecrease: ()=>{},
     onIncrease: ()=>{}
   }

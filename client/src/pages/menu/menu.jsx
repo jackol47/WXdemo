@@ -13,7 +13,8 @@ export default class Menu extends Component {
     this.state = {
       current: 0,
       dishList: [],
-      cartList: []
+      cartList: [],
+      display: false
     }
   }
 
@@ -31,17 +32,25 @@ export default class Menu extends Component {
   }
 
   turnToRecommendPage = () => {
+    Taro.setStorage({
+      key:'cart',
+      data: this.state.cartList
+    })
     Taro.navigateTo({
       url: '/pages/recommend/recommend?id=1'
     })
   }
 
+  displayClick = () =>{
+    this.setState(pre => ({ display: !pre.display }))
+  }
+
   
 
   render() {
-    const { dishList, cartList } = this.state
-    console.log('dishList: ', dishList);
-    console.log('cartList', cartList);
+    const { dishList, cartList, display } = this.state
+    // console.log('dishList: ', dishList);
+    // console.log('cartList', cartList);
     
     return (
       <View>
@@ -149,23 +158,24 @@ export default class Menu extends Component {
         </AtTabs>
 
         <View className='menuBottom'>
-          <View className='cart'>
+          <View className='cart' onClick={this.displayClick}>
             <Image src={Cart} style='width:100rpx;height:100rpx;' />
+            <Text className='dishCount'>{cartList.length}</Text>
           </View>
           <View className='selectOver' onClick={this.turnToRecommendPage}>选好了</View>
-          <View className='cartList'>
+          {display && <View className='cartList'>
             {
               cartList.map((item, index) => {
                 return (
                   <View className='cartItem' key={index}>
                     <Text style='float:left'>{item.name}</Text>
-                    <Text style='float:right'>{`x${item.count}`}</Text>
-                    <Text style='float:right'>{item.price}</Text>
+                    <Text style='float:right;margin-left:200rpx'>{`x${item.count}`}</Text>
+                    <Text style='float:right'>{`${item.price}元`}</Text>
                   </View>
                 )
               })
             }
-          </View>
+          </View>}
         </View>
       </View>
     );
