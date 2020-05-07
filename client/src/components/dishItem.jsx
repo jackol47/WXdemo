@@ -9,7 +9,8 @@ class DishItem extends Component {
         name: '',
         price: 0,
         img: '',
-        cartList: []
+        cartList: [],
+        dishId: ''
     }
 
     state = {
@@ -23,7 +24,13 @@ class DishItem extends Component {
         this.setState({count: newCount})
         if(newCount === 0){
           this.setState({ isShow: false })
+          let index = this.props.cartList.findIndex(item => item.dishId === this.props.dishId)
+          this.props.cartList.splice(index,1)
+        } else if(newCount > 0){
+          this.addToCart(newCount)
         }
+        
+        console.log('cartList', this.props.cartList);
       }
     
       onIncrease = (newCount) => { 
@@ -31,9 +38,27 @@ class DishItem extends Component {
         this.setState({count: newCount})
         if(newCount > 0){
           this.setState({ isShow: true })
+          this.addToCart(newCount)
         }
+
+        console.log('cartList', this.props.cartList);
       }
-    
+  
+  addToCart = (newCount) => {
+    if(this.props.cartList.some( item => item.dishId === this.props.dishId)){
+      this.props.cartList.map( item => {
+        item.count = newCount
+      })
+    } else {
+      this.props.cartList.push({
+        dishId: this.props.dishId,
+        name: this.props.name,
+        price: this.props.price,
+        img: this.props.img,
+        count: newCount
+      })
+    }
+  }    
     
   render() {
       const { isShow, count } = this.state

@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Image } from '@tarojs/components';
+import { View, Image, Text } from '@tarojs/components';
 import { AtTabs, AtTabsPane } from 'taro-ui'
 import Cart from '@/img/cart.png'
 import { getDish } from '@/utils/service'
@@ -71,6 +71,7 @@ export default class Menu extends Component {
                         price={item.price}
                         img={item.img}
                         cartList={cartList}
+                        dishId={item.dish_id}
                       />
   
                     }
@@ -91,6 +92,8 @@ export default class Menu extends Component {
                         name={item.name}
                         price={item.price}
                         img={item.img}
+                        cartList={cartList}
+                        dishId={item.dish_id}
                       />
   
                     }
@@ -111,6 +114,8 @@ export default class Menu extends Component {
                         name={item.name}
                         price={item.price}
                         img={item.img}
+                        cartList={cartList}
+                        dishId={item.dish_id}
                       />
   
                     }
@@ -131,6 +136,8 @@ export default class Menu extends Component {
                         name={item.name}
                         price={item.price}
                         img={item.img}
+                        cartList={cartList}
+                        dishId={item.dish_id}
                       />
   
                     }
@@ -146,6 +153,19 @@ export default class Menu extends Component {
             <Image src={Cart} style='width:100rpx;height:100rpx;' />
           </View>
           <View className='selectOver' onClick={this.turnToRecommendPage}>选好了</View>
+          <View className='cartList'>
+            {
+              cartList.map((item, index) => {
+                return (
+                  <View className='cartItem' key={index}>
+                    <Text style='float:left'>{item.name}</Text>
+                    <Text style='float:right'>{`x${item.count}`}</Text>
+                    <Text style='float:right'>{item.price}</Text>
+                  </View>
+                )
+              })
+            }
+          </View>
         </View>
       </View>
     );

@@ -15,37 +15,7 @@ export default class Index extends Component {
     };
   }
 
-<<<<<<< HEAD
-  // 想要用户在加载页面之前首先授权登录，可是不会写
-  // Page({
-  //   data: {
-  //     canIUse: Taro.canIUse('Button.open-type.getUserInfo')
-  //   },
-  //   onLoad: function () {
-  //     Taro.getSetting({
-  //       success(res) {
-  //         if(!res.authSetting['scope.userInfo']) {
-  //           Taro.authorize({
-  //             scope: 'scope.userInfo',
-              
-  //             success (){
-  //               Taro.getUserInfo()
-  //             }
-  //           })
-  //         } else {
-  //           Taro.getUserInfo({
-  //             success: function() {
-  //               console.log(res.userInfo)
-  //             }
-  //           })
-  //         }
-  //       }
-  //     })
-  //   }
-  // })
 
-=======
->>>>>>> 1b50dec0f9dea5064edd21f132d3d3de97aca0fb
   async componentDidMount() {
     const { uid } = await login()
     console.log("uid: ", uid)
