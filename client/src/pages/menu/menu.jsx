@@ -14,7 +14,7 @@ export default class Menu extends Component {
       current: 0,
       dishList: [],
       cartList: [],
-      display: false
+      display: false,
     }
   }
 
@@ -24,6 +24,8 @@ export default class Menu extends Component {
     this.setState({ dishList })
     
   }
+
+  async componentDidUpdate() { }
 
   handleClick (value) {
     this.setState({
