@@ -26,8 +26,10 @@ class App extends Component {
       'pages/recommend/recommend',
       'pages/orderConfirm/orderConfirm',
       'pages/success/success',
-      'pages/orderDetails/orderDetails',
+      'pages/latestOrder/latestOrder',
       'pages/integral/integral',
+      'pages/history/history',
+      'pages/orderDetails/orderDetails',
     ],
     window: {
       backgroundTextStyle: 'light',

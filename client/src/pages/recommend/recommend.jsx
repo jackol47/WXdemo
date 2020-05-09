@@ -1,7 +1,6 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, ScrollView, Image } from '@tarojs/components';
 import { AtList, AtListItem } from "taro-ui"
-import One from '@/img/card.jpg'
 import Add from '@/components/add/add'
 import { getDish } from '@/utils/service'
 import './recommend.less'
@@ -72,10 +71,11 @@ export default class Recommend extends Component {
   }
 
   addToCart = (dishId,name,price,img) => {
+    let newList = this.state.cartList
     if(this.state.cartList.some( item => item.dishId === dishId)){
 
     } else{
-      this.state.cartList.push({
+      newList.push({
         dishId: dishId,
         name: name,
         price: price,
@@ -83,12 +83,13 @@ export default class Recommend extends Component {
         count: 1
       })
     }
+    this.setState({cartList: newList})
+    this.summary()
     // Taro.setStorage({
     //   key:'cart',
     //   data: this.state.cartList
     // })
     
-    console.log(this.state.cartList)
   }
 
   summary = () => {
@@ -106,15 +107,21 @@ export default class Recommend extends Component {
     })
   }
 
-  turnToOrderConfirmPage = () => {
+  readyToOrder = () => {
+    Taro.setStorage({
+      key:'cart',
+      data: this.state.cartList
+    })
+
     Taro.navigateTo({
-      url: '/pages/orderConfirm/orderConfirm'
+      url: '/pages/orderConfirm/orderConfirm?id=1'
     })
   }
 
   render() {
 
     const { cartList, dishList, sumPrice } = this.state
+    console.log('cartList', cartList);
     dishList.forEach(item => {
       item.isSelected = false
     })
@@ -125,10 +132,8 @@ export default class Recommend extends Component {
         }
       })
     })
-    console.log(dishList)
 
     const recList = dishList.filter(item => !item.isSelected)
-    console.log(recList);
     let recRandom = []
     let random = []
     for (let i = 0; i < 9; i++) {
@@ -138,7 +143,6 @@ export default class Recommend extends Component {
         recRandom.push(recList[j])
       }
     }
-    console.log(recRandom);
     return (
       <View>
         <ScrollView style='height: 1100rpx' scrollY>
@@ -190,7 +194,7 @@ export default class Recommend extends Component {
           <Text className='total'>{`${sumPrice}元`}</Text>
           <View className='btnWrap'>
             <View className='btnItem' style='background-color: orange' onClick={this.backToMenuPage}>继续点菜</View>
-            <View className='btnItem' style='background-color: red' onClick={this.turnToOrderConfirmPage}>去下单</View>
+            <View className='btnItem' style='background-color: red' onClick={this.readyToOrder}>去下单</View>
           </View>
         </View>
       </View>

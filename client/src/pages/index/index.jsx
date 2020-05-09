@@ -34,6 +34,12 @@ export default class Index extends Component {
     })
   }
 
+  turnToHistorylPage = () =>{
+    Taro.navigateTo({
+      url: '/pages/history/history?id=1'
+    })
+  }
+
   render() {
     return (
 
@@ -67,7 +73,7 @@ export default class Index extends Component {
             <Image src={Integral} style='width:50px;height: 50px' />
             <Text>积分商城</Text>
           </View>
-          <View className='contentItem'>
+          <View className='contentItem' onClick={this.turnToHistorylPage}>
             <Image src={Order} style='width:50px;height: 50px' />
             <Text>历史订单</Text>
           </View>
