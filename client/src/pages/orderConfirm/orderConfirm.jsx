@@ -62,7 +62,6 @@ export default class OrderConfirm extends Component {
     let sum = orderList.reduce((pre, cur) => {
       return pre + cur.price * cur.count
     }, 0);
-    console.log(sum);
     return (
       <View>
         <ScrollView style='height: 1100rpx' scrollY>

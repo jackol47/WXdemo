@@ -30,7 +30,7 @@ export default class Index extends Component {
 
   turnToIntegralPage = () =>{
     Taro.navigateTo({
-      url: '/pages/integral/integral'
+      url: '/pages/integral/integral?id=1'
     })
   }
 

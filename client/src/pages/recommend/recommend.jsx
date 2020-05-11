@@ -11,7 +11,8 @@ export default class Recommend extends Component {
     super(props);
     this.state = {
       cartList: [],
-      dishList: [],
+      recList: [],
+      random: [],
       sumPrice: 0
     }
   }
@@ -27,13 +28,32 @@ export default class Recommend extends Component {
     })
 
     const { dishList } = await getDish()
-    this.setState({ dishList })
 
+    let recList = []
+    this.state.cartList.forEach(cartItem => {
+      dishList.forEach(item => {
+        if (item.dish_id !== cartItem.dishId) {
+          recList.push(item)
+        }
+      })
+    })
+    this.setState({ recList: recList })
+    let random = []
+    for (let i = 0; i < 9; i++) {
+      let j = Math.floor(Math.random() * recList.length)
+      if (!random.includes(j)) {
+        random.push(j)
+      }
+    }
+    this.setState({
+      recList: recList,
+      random: random
+    })
     this.summary()
   }
 
-  async componentDidUpdate() {
-  }
+  // async componentDidUpdate() {
+  // }
 
 
 
@@ -47,7 +67,6 @@ export default class Recommend extends Component {
       this.add(newCount, id)
     }
 
-    console.log('cartList', this.state.cartList);
     this.summary()
   }
 
@@ -57,7 +76,6 @@ export default class Recommend extends Component {
       this.add(newCount, id)
     }
 
-    console.log('cartList', this.state.cartList);
     this.summary()
   }
 
@@ -70,11 +88,11 @@ export default class Recommend extends Component {
     })
   }
 
-  addToCart = (dishId,name,price,img) => {
+  addToCart = (dishId, name, price, img) => {
     let newList = this.state.cartList
-    if(this.state.cartList.some( item => item.dishId === dishId)){
+    if (this.state.cartList.some(item => item.dishId === dishId)) {
 
-    } else{
+    } else {
       newList.push({
         dishId: dishId,
         name: name,
@@ -83,13 +101,9 @@ export default class Recommend extends Component {
         count: 1
       })
     }
-    this.setState({cartList: newList})
+    this.setState({ cartList: newList })
     this.summary()
-    // Taro.setStorage({
-    //   key:'cart',
-    //   data: this.state.cartList
-    // })
-    
+
   }
 
   summary = () => {
@@ -109,7 +123,7 @@ export default class Recommend extends Component {
 
   readyToOrder = () => {
     Taro.setStorage({
-      key:'cart',
+      key: 'cart',
       data: this.state.cartList
     })
 
@@ -120,28 +134,13 @@ export default class Recommend extends Component {
 
   render() {
 
-    const { cartList, dishList, sumPrice } = this.state
-    console.log('cartList', cartList);
-    dishList.forEach(item => {
-      item.isSelected = false
-    })
-    cartList.forEach(cartItem => {
-      dishList.forEach(item => {
-        if (item.dish_id === cartItem.dishId) {
-          item.isSelected = true
-        }
-      })
-    })
+    const { cartList, sumPrice, recList, random } = this.state
 
-    const recList = dishList.filter(item => !item.isSelected)
     let recRandom = []
-    let random = []
-    for (let i = 0; i < 9; i++) {
-      let j = Math.floor(Math.random() * recList.length)
-      if (!random.includes(j)) {
-        random.push(j)
-        recRandom.push(recList[j])
-      }
+    for (let i = 0; i < random.length; i++) {
+
+      recRandom.push(recList[i])
+
     }
     return (
       <View>
@@ -180,12 +179,12 @@ export default class Recommend extends Component {
                       <Image src={item.img} className='recImg' />
                       <View style='font-size: 24rpx'>{item.name}</View>
                       <View style='font-size: 24rpx'>{`${item.price}元`}</View>
-                      <View className='addToCart' onClick={() => this.addToCart(item.dish_id,item.name,item.price,item.img)}>加入购物车</View>
+                      <View className='addToCart' onClick={() => this.addToCart(item.dish_id, item.name, item.price, item.img)}>加入购物车</View>
                     </View>
                   )
                 })
               }
-              
+
             </View>
           </View>
 

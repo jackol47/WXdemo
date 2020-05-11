@@ -15,6 +15,7 @@ export default class Menu extends Component {
       dishList: [],
       cartList: [],
       display: false,
+      cartLength: 0
     }
   }
 
@@ -22,7 +23,7 @@ export default class Menu extends Component {
   async componentDidMount() {
     const { dishList } = await getDish()
     this.setState({ dishList })
-    
+    this.setState({cartLength: this.state.cartList.length})
   }
 
   async componentDidUpdate() { }
@@ -47,10 +48,14 @@ export default class Menu extends Component {
     this.setState(pre => ({ display: !pre.display }))
   }
 
+  onCountsChange = (list) => {
+    this.setState({cartLength: list.length})
+  }
+
   
 
   render() {
-    const { dishList, cartList, display } = this.state
+    const { dishList, cartList, display, cartLength } = this.state
     // console.log('dishList: ', dishList);
     // console.log('cartList', cartList);
     
@@ -83,6 +88,7 @@ export default class Menu extends Component {
                         img={item.img}
                         cartList={cartList}
                         dishId={item.dish_id}
+                        onCountsChange={() => this.onCountsChange(cartList)}
                       />
   
                     }
@@ -105,6 +111,7 @@ export default class Menu extends Component {
                         img={item.img}
                         cartList={cartList}
                         dishId={item.dish_id}
+                        onCountsChange={() => this.onCountsChange(cartList)}
                       />
   
                     }
@@ -127,6 +134,7 @@ export default class Menu extends Component {
                         img={item.img}
                         cartList={cartList}
                         dishId={item.dish_id}
+                        onCountsChange={() => this.onCountsChange(cartList)}
                       />
   
                     }
@@ -149,6 +157,7 @@ export default class Menu extends Component {
                         img={item.img}
                         cartList={cartList}
                         dishId={item.dish_id}
+                        onCountsChange={() => this.onCountsChange(cartList)}
                       />
   
                     }
@@ -162,7 +171,7 @@ export default class Menu extends Component {
         <View className='menuBottom'>
           <View className='cart' onClick={this.displayClick}>
             <Image src={Cart} style='width:100rpx;height:100rpx;' />
-            <Text className='dishCount'>{cartList.length}</Text>
+            <Text className='dishCount'>{cartLength}</Text>
           </View>
           <View className='selectOver' onClick={this.turnToRecommendPage}>选好了</View>
           {display && <View className='cartList'>

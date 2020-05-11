@@ -18,7 +18,7 @@ class OrderList extends Component {
 
     render() {
         const { menuList } = this.props
-        console.log('menuList: ', menuList)
+        // console.log('menuList: ', menuList)
         return (
           <View>
             {
