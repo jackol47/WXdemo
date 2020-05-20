@@ -1,8 +1,7 @@
 import Taro , { Component } from '@tarojs/taro';
 import PropTypes from 'prop-types'
 import { View, Text, Image} from '@tarojs/components';
-// import Food from '@/img/dish22.jpg'
-
+// import Food from '@/img/dish1.jpg'
 import './dish.less';
 
 class Dish extends Component {

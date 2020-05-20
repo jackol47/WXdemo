@@ -37,6 +37,13 @@ export default class Recommend extends Component {
         }
       })
     })
+    // for(let i = 0; i < this.state.cartList.length; i++){
+    //   for(let j = 0; j < dishList.length; j++){
+    //     if(this.state.cartList[i].dishId !== dishList[j].dish_id){
+    //       recList.push(dishList[j])
+    //     }
+    //   }
+    // }
     this.setState({ recList: recList })
     let random = []
     for (let i = 0; i < 9; i++) {
@@ -139,7 +146,7 @@ export default class Recommend extends Component {
     let recRandom = []
     for (let i = 0; i < random.length; i++) {
 
-      recRandom.push(recList[i])
+      recRandom.push(recList[random[i]])
 
     }
     return (
