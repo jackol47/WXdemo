@@ -1,7 +1,7 @@
 import Taro , { Component } from '@tarojs/taro';
-import { View, Text, ScrollView } from '@tarojs/components';
+import { View, Text, ScrollView, Button } from '@tarojs/components';
 import { AtAvatar } from 'taro-ui'
-import { getDish, getOrderForm } from '@/utils/service'
+import { getDish, updatePoint, getPoint } from '@/utils/service'
 import Commodity from '@/components/commodity/commodity';
 import Back from '@/components/back/back';
 
@@ -12,22 +12,15 @@ export default class Integral extends Component {
         nickName : "",
         avatarUrl: "",
         goodsList: [],
-        integral: 0
+        integral: 0,
+        isLogin: false
     }
 
     async componentDidMount(){
-        Taro.getUserInfo({
-            success: function(res) {
-                const userInfo = res.userInfo
-                this.setState({nickName: userInfo.nickName, avatarUrl: userInfo.avatarUrl})
-            }
-        })
-
-        const { orderList } = await getOrderForm() 
-        const integral = orderList.reduce((pre, cur) => pre + cur.sumPrice, 0)
+        const { integral } = await getPoint() 
         
         const { dishList } = await getDish()
-        const goodsList = dishList.filter(item => item.type === 'commodity')
+        const goodsList = dishList.filter(item => item.type.indexOf('commodity') !== -1)
         this.setState({
           integral: integral,
           goodsList: goodsList
@@ -36,6 +29,7 @@ export default class Integral extends Component {
 
     // componentDidUpdate() { }
 
+    // 计算剩余积分
     onHandleClick = (integral, point) => {
       let points = point * 10
       if(integral >= points){
@@ -47,7 +41,7 @@ export default class Integral extends Component {
           duration: 2000
         })
           .then(res => console.log(res))
-
+        updatePoint(remainder)
       } else{
         Taro.showToast({
           title: '兑换失败，积分不足',
@@ -57,19 +51,43 @@ export default class Integral extends Component {
           .then(res => console.log(res))
       }
     }
+
+    // 授权登录
+    handleGetUserInfo(e) {
+      console.log(e.detail.userInfo)
+      const { avatarUrl, nickName } = e.detail.userInfo
+      this.setState({
+        nickName: nickName,
+        avatarUrl: avatarUrl,
+      })
+      this.setState(pre => ({ isLogin: !pre.isLogin}))
+    }
     
 
   
   render() {
-    const { nickName, avatarUrl, integral, goodsList } = this.state
+    const { nickName, avatarUrl, integral, goodsList, isLogin } = this.state
+    console.log(isLogin);
     return (
       <View>
-        <View className='user'>
-            <AtAvatar circle image={avatarUrl}></AtAvatar>
+        {
+          !isLogin && 
+          <View className='login'>
+            <Button className='loginBtn' onGetUserInfo={this.handleGetUserInfo} openType='getUserInfo'>登录</Button>
+          </View>
+        }
+
+        {
+          isLogin && 
+          <View className='user'>
+            <AtAvatar size='large' style='margin-right: 40rpx' circle image={avatarUrl}></AtAvatar>
             <Text>{nickName}</Text>
             <Text>{`积分: ${integral}`}</Text>
-        </View>
-        <ScrollView style='height: 1000rpx' scrollY>
+          </View>
+        }
+        
+        
+        <ScrollView style='height: 910rpx' scrollY>
             {
               goodsList.map((item, index) => {
                 return (

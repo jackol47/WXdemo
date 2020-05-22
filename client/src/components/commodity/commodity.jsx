@@ -21,6 +21,8 @@ class Commodity extends Component {
       if(this.props.integral >= this.props.point){
         this.setState({exchanged: true})
 
+      } else {
+        this.setState({exchanged: false})
       }
       this.props.onHandleClick()
     }

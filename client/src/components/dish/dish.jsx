@@ -1,15 +1,20 @@
 import Taro , { Component } from '@tarojs/taro';
 import PropTypes from 'prop-types'
 import { View, Text, Image} from '@tarojs/components';
-// import Food from '@/img/dish1.jpg'
+import Food from '@/img/index'
 import './dish.less';
 
 class Dish extends Component {
   static defaultProps = {
-    img: '',
+    img: Food,
     name: '',
     price: 0,
   }
+
+  // componentDidMount() {
+  //   console.log('food', Food);
+  //   console.log('img', this.props.img);
+  // }
 
   render() {
     const { img, name, price } = this.props

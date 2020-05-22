@@ -71,6 +71,8 @@ export default class Menu extends Component {
             { title: '河海鲜类' },
             { title: '水煮类' },
             { title: '汤类' },
+            { title: '酒水饮料' },
+            { title: '其他' }
           ]}
           onClick={this.handleClick.bind(this)}
         >
@@ -151,6 +153,52 @@ export default class Menu extends Component {
                   <View key={index}>
                     {
                       item.type === 'soup' &&
+                      <DishItem
+                        name={item.name}
+                        price={item.price}
+                        img={item.img}
+                        cartList={cartList}
+                        dishId={item.dish_id}
+                        onCountsChange={() => this.onCountsChange(cartList)}
+                      />
+  
+                    }
+                  </View>
+                )
+              })
+            }
+          </AtTabsPane>
+          <AtTabsPane tabDirection='vertical' current={this.state.current} index={4}>
+            <View className='typeTitle'>酒水饮料</View>
+            {
+              dishList.map((item, index) => {
+                return (
+                  <View key={index}>
+                    {
+                      item.type.indexOf('drink') !== -1 &&
+                      <DishItem
+                        name={item.name}
+                        price={item.price}
+                        img={item.img}
+                        cartList={cartList}
+                        dishId={item.dish_id}
+                        onCountsChange={() => this.onCountsChange(cartList)}
+                      />
+  
+                    }
+                  </View>
+                )
+              })
+            }
+          </AtTabsPane>
+          <AtTabsPane tabDirection='vertical' current={this.state.current} index={5}>
+            <View className='typeTitle'>其他</View>
+            {
+              dishList.map((item, index) => {
+                return (
+                  <View key={index}>
+                    {
+                      item.type.indexOf('other') !== -1 &&
                       <DishItem
                         name={item.name}
                         price={item.price}

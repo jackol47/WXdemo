@@ -21,7 +21,7 @@ export default class LatestOrder extends Component {
 
   render() {
     const { latest } =this.state
-    console.log(latest);
+    let buildDate = new Date(latest.buildDate)
     return (
       <View>
         <AtList>
@@ -42,8 +42,8 @@ export default class LatestOrder extends Component {
             />
             <AtListItem 
               title='订单时间'
-              note='05月04日'
-              extraText='下午4:10'
+              note={buildDate.toLocaleDateString()}
+              extraText={buildDate.toLocaleTimeString()}
             />
         </AtList>
         <Back pageNum={5} />

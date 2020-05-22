@@ -27,13 +27,14 @@ export default class OrderDetails extends Component {
     const { menuList } = orderItem
     this.setState({
       orderItem: orderItem,
-      menuList: menuList
+      menuList: menuList,
+      buildDate: new Date(orderItem.buildDate)
     })
   }
   
 
   render() {
-    const { orderId, orderItem, menuList } = this.state
+    const { orderId, orderItem, menuList, buildDate } = this.state
     console.log('orderItem', orderItem);
     console.log('menuList', menuList);
     return (
@@ -56,8 +57,8 @@ export default class OrderDetails extends Component {
             />
             <AtListItem 
               title='订单时间'
-              note='05月04日'
-              extraText='下午4:10'
+              note={buildDate.toLocaleDateString()}
+              extraText={buildDate.toLocaleTimeString()}
             />
         </AtList>
         <Back pageNum={2} />

@@ -37,8 +37,8 @@ export default class History extends Component {
                   return (
                     <AtListItem
                       key={index}
-                      title='shijian'
-                      note={`订单号${item.orderId}`}
+                      title={new Date(item.buildDate).toLocaleDateString()}
+                      note={new Date(item.buildDate).toLocaleTimeString()}
                       extraText={`实付${item.sumPrice}元`}
                       arrow='right'
                       onClick={() => {this.more(item.orderId)}}

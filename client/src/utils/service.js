@@ -25,4 +25,18 @@ export function getDish() {
   return request({name: 'ty-getDish'})
 }
 
-export default { login, getOrderForm, submitOrder, getDish };
+export function updatePoint(remainder) {
+  const param = {
+    name: 'ty-updatePoint',
+    data: {
+      remainder
+    }
+  }
+  return request(param)
+}
+
+export function getPoint() {
+  return request({name: 'ty-getPoint'})
+}
+
+export default { login, getOrderForm, submitOrder, getDish, updatePoint, getPoint };
