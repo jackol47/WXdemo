@@ -28,6 +28,7 @@ class App extends Component {
       'pages/success/success',
       'pages/latestOrder/latestOrder',
       'pages/integral/integral',
+      'pages/record/record',
       'pages/history/history',
       'pages/orderDetails/orderDetails',
     ],

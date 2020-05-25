@@ -11,40 +11,39 @@ export default class Recommend extends Component {
     super(props);
     this.state = {
       cartList: [],
-      recList: [],
-      random: [],
+      recRandom: [],
       sumPrice: 0
     }
   }
 
   async componentDidMount() {
+    let cartList
     Taro.getStorage({
       key: 'cart',
       success: (res) => {
-        this.setState({
-          cartList: res.data
-        })
+        cartList = res.data
+        this.setState({ cartList: cartList })
       }
     })
 
     const { dishList } = await getDish()
 
-    let recList = []
-    this.state.cartList.forEach(cartItem => {
-      dishList.forEach(item => {
-        if (item.dish_id !== cartItem.dishId) {
-          recList.push(item)
+    // 筛选未选择的菜品
+    dishList.forEach(item => {
+      cartList.forEach(cartItem => {
+        if(item.dish_id === cartItem.dishId){
+          item.isSelected = true
+        }else{
+          if(!item.isSelected){
+            item.isSelected = false
+          }
         }
       })
     })
-    // for(let i = 0; i < this.state.cartList.length; i++){
-    //   for(let j = 0; j < dishList.length; j++){
-    //     if(this.state.cartList[i].dishId !== dishList[j].dish_id){
-    //       recList.push(dishList[j])
-    //     }
-    //   }
-    // }
-    this.setState({ recList: recList })
+
+    let recList = dishList.filter(item => !item.isSelected)
+
+    // 构造随机数组
     let random = []
     for (let i = 0; i < 9; i++) {
       let j = Math.floor(Math.random() * recList.length)
@@ -52,9 +51,21 @@ export default class Recommend extends Component {
         random.push(j)
       }
     }
+
+    // 生成推荐菜单
+    let recRandom = []
+    for (let i = 0; i < random.length; i++) {
+
+      recRandom.push(recList[random[i]])
+
+    }
+    // console.log('random', random);
+    // console.log('cartList', cartList);
+    // console.log('recList', recList);
+    // console.log('recRandom', recRandom);
+
     this.setState({
-      recList: recList,
-      random: random
+      recRandom: recRandom
     })
     this.summary()
   }
@@ -141,14 +152,9 @@ export default class Recommend extends Component {
 
   render() {
 
-    const { cartList, sumPrice, recList, random } = this.state
+    const { cartList, sumPrice, recRandom } = this.state
 
-    let recRandom = []
-    for (let i = 0; i < random.length; i++) {
 
-      recRandom.push(recList[random[i]])
-
-    }
     return (
       <View>
         <ScrollView style='height: 1100rpx' scrollY>

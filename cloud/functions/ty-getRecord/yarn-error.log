@@ -1,0 +1,40 @@
+Arguments: 
+  D:\nodejs\node.exe D:\nodejs\node_global\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\nodejs\;D:\Git\bin;D:\Git\mingw64\libexec\git-core;D:\Git\mingw64\bin;D:\nodejs\node_global\;D:\Ruby27-x64\bin;C:\Users\22966\AppData\Local\Microsoft\WindowsApps;C:\Users\22966\AppData\Roaming\npm;D:\nodejs\node_global\;;D:\Microsoft VS Code\bin
+
+Yarn version: 
+  1.21.1
+
+Node version: 
+  12.14.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: connect ETIMEDOUT 104.16.16.35:443
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1129:14)
+
+npm manifest: 
+  {
+    "name": "login",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "wx-server-sdk": "^1.8.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

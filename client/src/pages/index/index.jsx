@@ -71,7 +71,7 @@ export default class Index extends Component {
         <View className='content'>
           <View className='contentItem' onClick={this.turnToIntegralPage}>
             <Image src={Integral} style='width:50px;height: 50px' />
-            <Text>积分商城</Text>
+            <Text>积分兑换</Text>
           </View>
           <View className='contentItem' onClick={this.turnToHistorylPage}>
             <Image src={Order} style='width:50px;height: 50px' />

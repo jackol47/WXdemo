@@ -21,6 +21,7 @@ export default class Success extends Component {
             <Image src={Ok} className='ok' />
             <Text>下单成功</Text>
         </View>
+        <View className='table'>桌号01</View>
         <View className='ckeckBox'>
             <Text>服务员即将送餐</Text>
             <View className='check' onClick={this.turnToOrderDetailsPage}>查看订单</View>

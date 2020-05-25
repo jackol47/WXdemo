@@ -39,4 +39,18 @@ export function getPoint() {
   return request({name: 'ty-getPoint'})
 }
 
-export default { login, getOrderForm, submitOrder, getDish, updatePoint, getPoint };
+export function exchange(commodityId) {
+  const param = {
+    name: 'ty-exchange',
+    data: {
+      commodityId
+    }
+  }
+  return request(param)
+}
+
+export function getRecord() {
+  return request({name: 'ty-getRecord'})
+}
+
+export default { login, getOrderForm, submitOrder, getDish, updatePoint, getPoint, exchange, getRecord };

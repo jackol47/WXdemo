@@ -1,7 +1,7 @@
 import Taro , { Component } from '@tarojs/taro';
 import { View, Text, ScrollView, Button } from '@tarojs/components';
 import { AtAvatar } from 'taro-ui'
-import { getDish, updatePoint, getPoint } from '@/utils/service'
+import { getDish, updatePoint, getPoint, exchange } from '@/utils/service'
 import Commodity from '@/components/commodity/commodity';
 import Back from '@/components/back/back';
 
@@ -30,7 +30,7 @@ export default class Integral extends Component {
     // componentDidUpdate() { }
 
     // 计算剩余积分
-    onHandleClick = (integral, point) => {
+    onHandleClick = (integral,commodityId, point) => {
       let points = point * 10
       if(integral >= points){
         let remainder = integral - points
@@ -41,6 +41,9 @@ export default class Integral extends Component {
           duration: 2000
         })
           .then(res => console.log(res))
+        
+        exchange(commodityId)
+        console.log(commodityId);
         updatePoint(remainder)
       } else{
         Taro.showToast({
@@ -62,12 +65,19 @@ export default class Integral extends Component {
       })
       this.setState(pre => ({ isLogin: !pre.isLogin}))
     }
+
+    // 跳转到兑换记录
+    turnToRecordPage = () => {
+      Taro.navigateTo({
+        url: '/pages/record/record'
+      })
+    }
     
 
   
   render() {
     const { nickName, avatarUrl, integral, goodsList, isLogin } = this.state
-    console.log(isLogin);
+    console.log(goodsList);
     return (
       <View>
         {
@@ -83,6 +93,7 @@ export default class Integral extends Component {
             <AtAvatar size='large' style='margin-right: 40rpx' circle image={avatarUrl}></AtAvatar>
             <Text>{nickName}</Text>
             <Text>{`积分: ${integral}`}</Text>
+            <View className='recordBtn' onClick={this.turnToRecordPage}>兑换记录 &gt;</View>
           </View>
         }
         
@@ -97,7 +108,7 @@ export default class Integral extends Component {
                     point={item.price * 10}
                     img={item.img}
                     integral={integral}
-                    onHandleClick={() => this.onHandleClick(integral, item.price)}
+                    onHandleClick={() => this.onHandleClick(integral,item.dish_id, item.price)}
                   />
                 )
               })
