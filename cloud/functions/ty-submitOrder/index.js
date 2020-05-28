@@ -18,8 +18,6 @@ exports.main = async (event, context) => {
   let menuList = [];
 
   let buildDate
-  // let buildDate = ''
-  // let buildTime = ''
   
   for(let i = 0; i < menuIdList.length; i++) {
     let dist = {}
@@ -29,28 +27,29 @@ exports.main = async (event, context) => {
     const { price, name } = data[0]
     dist = { price, name, dishId, count }
     sumPrice = count * price + sumPrice
-    // buildDate = date.toLocaleDateString()
-    // buildTime = date.toLocaleTimeString()
     menuList.push(dist)
   }
 
   let order = {
     uid: OPENID,
+    buildDate: new Date(),
     menuList,
     note,
     sumPrice,
-    buildDate: new Date(),
-    // buildTime,
-    orderId: createHash
+    orderId: createHash,
+    status: '待付款'
   }
-
-  const res = await userForm.where({uid: _.eq(OPENID) }).update({
-    data: {
-      interPoint: _.inc(sumPrice)
-    }
-  })
 
   const { errMsg } = await orderForm.add({ data: { ...order} })
 
-  return { success: res, errMsg, buildDate };
+  await userForm.where({uid: _.eq(OPENID) }).update({
+    data: {
+      interPoint: _.inc(sumPrice),
+      // favorList: favorList.push(...menuList)
+    }
+  })
+
+
+
+  return { success: true,errMsg, data: order };
 };

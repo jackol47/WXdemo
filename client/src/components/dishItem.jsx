@@ -11,27 +11,27 @@ class DishItem extends Component {
         img: '',
         cartList: [],
         dishId: '',
-        count: 0,
+        
         onCountsChange: ()=>{}
     }
 
     state = {
-        
-        isShow: false
+      count: 0,
+      isShow: false
     }
 
 
     onDecrease = (newCount) => { 
         newCount--
         // this.setState({count: newCount})
-        this.props.count = newCount
+        this.setState({ count: newCount })
         if(newCount === 0){
           this.setState({ isShow: false })
           let index = this.props.cartList.findIndex(item => item.dishId === this.props.dishId)
           this.props.cartList.splice(index,1)
           // this.props.cartLength--
           this.props.onCountsChange(this.props.cartList)
-        } else if(newCount > 0){
+        } else{
           this.addToCart(newCount)
         }
         
@@ -40,8 +40,8 @@ class DishItem extends Component {
     
       onIncrease = (newCount) => { 
         newCount++
-        // this.setState({count: newCount})
-        this.props.count = newCount
+        this.setState({count: newCount})
+        // this.props.count = newCount
         if(newCount > 0){
           this.setState({ isShow: true })
           this.addToCart(newCount)
@@ -68,8 +68,8 @@ class DishItem extends Component {
   }    
     
   render() {
-      const { isShow } = this.state
-      const { name, price, img, count } = this.props
+      const { isShow, count } = this.state
+      const { name, price, img } = this.props
       
     return (
       <View style='position:relative'>

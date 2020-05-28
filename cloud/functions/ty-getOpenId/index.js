@@ -9,6 +9,7 @@ const _ = db.command;
 const user = db.collection('user');
 
 exports.main = async (event, context) => {
+  const { avatarUrl, nickName } = event
   const wxContext = cloud.getWXContext(context);
   const { OPENID } = wxContext;
   
@@ -21,7 +22,10 @@ exports.main = async (event, context) => {
         data: {
           uid: OPENID,
           interPoint: 0,
-          joinDate: new Date()
+          joinDate: new Date(),
+          avatarUrl,
+          nickName,
+          favorList: []
         }
       });
       return (errMsg === 'collection.add:ok') ? { success: true, data: {uid: OPENID} } : { success: false, errMsg: '添加用户失败' };

@@ -1,7 +1,14 @@
 import { request } from './request'
 
-export function login() {
-  return request({name: 'ty-getOpenId'});
+export function login(avatarUrl, nickName) {
+  const param = {
+    name: 'ty-getOpenId',
+    data: {
+      avatarUrl,
+      nickName
+    }
+  }
+  return request(param);
 }
 
 export function getOrderForm() {
@@ -35,8 +42,8 @@ export function updatePoint(remainder) {
   return request(param)
 }
 
-export function getPoint() {
-  return request({name: 'ty-getPoint'})
+export function getUserInfo() {
+  return request({name: 'ty-getUserInfo'})
 }
 
 export function exchange(commodityId) {
@@ -53,4 +60,14 @@ export function getRecord() {
   return request({name: 'ty-getRecord'})
 }
 
-export default { login, getOrderForm, submitOrder, getDish, updatePoint, getPoint, exchange, getRecord };
+export function changeStatus(orderId) {
+  const param = {
+    name: 'ty-changeStatus',
+    data: {
+      orderId
+    }
+  }
+  return request(param)
+}
+
+export default { login, getOrderForm, submitOrder, getDish, updatePoint, getUserInfo, exchange, getRecord, changeStatus };

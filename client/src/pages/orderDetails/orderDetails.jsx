@@ -2,7 +2,7 @@ import Taro , { Component } from '@tarojs/taro';
 import { View, ScrollView } from '@tarojs/components';
 import { AtList, AtListItem } from 'taro-ui'
 import OrderList from '@/components/orderList/orderList'
-import { getOrderForm } from '@/utils/service'
+import { getOrderForm, changeStatus } from '@/utils/service'
 import Back from '@/components/back/back';
 
 export default class OrderDetails extends Component {
@@ -16,31 +16,39 @@ export default class OrderDetails extends Component {
   async componentDidMount() {
     const { orderList } = await getOrderForm()
 
+    let storageOrderId
     await Taro.getStorage({
       key: 'orderId',
       success: (res) => {
-        this.setState({orderId: res.data})
+        storageOrderId = res.data
       }
     })
     
-    const orderItem = orderList.filter(item => item.orderId === this.state.orderId)[0]
+    const orderItem = orderList.filter(item => item.orderId === storageOrderId)[0]
     const { menuList } = orderItem
     this.setState({
+      orderId: storageOrderId,
       orderItem: orderItem,
       menuList: menuList,
-      buildDate: new Date(orderItem.buildDate)
+    })
+  }
+
+  toPay = () => {
+    changeStatus(this.state.orderId)
+    Taro.redirectTo({
+      url: '/pages/successPay/successPay'
     })
   }
   
 
   render() {
-    const { orderId, orderItem, menuList, buildDate } = this.state
+    const { orderId, orderItem, menuList } = this.state
     console.log('orderItem', orderItem);
     console.log('menuList', menuList);
     return (
       <View>
         <AtList>
-          <ScrollView style='height: 630rpx' scrollY>
+          <ScrollView style='height: 530rpx' scrollY>
             <OrderList menuList={menuList} />
           </ScrollView>
             <AtListItem 
@@ -56,10 +64,22 @@ export default class OrderDetails extends Component {
               extraText={orderId}
             />
             <AtListItem 
-              title='订单时间'
-              note={buildDate.toLocaleDateString()}
-              extraText={buildDate.toLocaleTimeString()}
+              title='下单时间'
+              note={new Date(orderItem.buildDate).toLocaleDateString()}
+              extraText={new Date(orderItem.buildDate).toLocaleTimeString()}
             />
+            {
+              orderItem.status === '已付款' ?
+              <AtListItem 
+                extraText='已付款'
+              /> :
+              <AtListItem 
+                title='待付款'
+                arrow='right'
+                extraText='结账'
+                onClick={this.toPay}
+              />
+            }
         </AtList>
         <Back pageNum={2} />
       </View>

@@ -31,6 +31,7 @@ class App extends Component {
       'pages/record/record',
       'pages/history/history',
       'pages/orderDetails/orderDetails',
+      'pages/successPay/successPay',
     ],
     window: {
       backgroundTextStyle: 'light',

@@ -22,6 +22,7 @@ exports.main = async (event, context) => {
     order['note'] = item.note;
     order['sumPrice'] = item.sumPrice
     order['buildDate'] = item.buildDate
+    order['status'] = item.status
     orderList.push(order);
   });
 

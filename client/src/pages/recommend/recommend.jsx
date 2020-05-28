@@ -11,14 +11,16 @@ export default class Recommend extends Component {
     super(props);
     this.state = {
       cartList: [],
-      recRandom: [],
+      recList: [],
       sumPrice: 0
     }
   }
 
   async componentDidMount() {
+    console.time('生成推荐菜单耗费时间')
+    // 获取到当前用户点的购物车菜单列表
     let cartList
-    Taro.getStorage({
+    await Taro.getStorage({
       key: 'cart',
       success: (res) => {
         cartList = res.data
@@ -28,52 +30,86 @@ export default class Recommend extends Component {
 
     const { dishList } = await getDish()
 
+    // 得到欲推荐的菜单
+    let toRecList = this.filterUnSelecDish(dishList, cartList)
+    console.log('toRecList', toRecList);
+
+    // 构造随机数组
+    let randomArr = this.buildRandom(toRecList)
+    
+    // 生成推荐菜单
+    let recList = this.getRecList(randomArr, toRecList)
+    console.timeEnd('生成推荐菜单耗费时间')
+    // 设置状态
+    this.setState({
+      recList: recList
+    })
+
+    // 计算总价
+    this.summary() 
+  }
+
+  // 筛选方法
+  filterUnSelecDish = (dishList, cartList) => {
+
     // 筛选未选择的菜品
     dishList.forEach(item => {
       cartList.forEach(cartItem => {
-        if(item.dish_id === cartItem.dishId){
+        if (item.dish_id === cartItem.dishId) {
           item.isSelected = true
-        }else{
-          if(!item.isSelected){
+        } else {
+          if (!item.isSelected) {
             item.isSelected = false
           }
         }
       })
     })
 
-    let recList = dishList.filter(item => !item.isSelected)
+    let typeArr = []
+    let unSelectList = dishList.reduce((list, item) => {
+      !item.isSelected ? list.push(item) : (!typeArr.includes(item.type) && typeArr.push(item.type))
+      return list
+    }, [])
 
-    // 构造随机数组
+    // 筛选出用户选择的菜品对应的未选菜品
+    let unSelectTypeList = []
+    typeArr.forEach(type => {
+      unSelectTypeList.push(...unSelectList.filter(item => item.type === type))
+    })
+
+    return unSelectTypeList
+  }
+
+  // 随机数组构造方法
+  buildRandom = list => {
     let random = []
-    for (let i = 0; i < 9; i++) {
-      let j = Math.floor(Math.random() * recList.length)
+    let unsLength = list.length
+    let k = 0
+    unsLength > 9 ? k = 9 : k = unsLength
+    for (let i = 0; i < k; i++) {
+      let j = Math.floor(Math.random() * unsLength)
       if (!random.includes(j)) {
         random.push(j)
+      } else{
+        i--
       }
     }
 
-    // 生成推荐菜单
-    let recRandom = []
-    for (let i = 0; i < random.length; i++) {
-
-      recRandom.push(recList[random[i]])
-
-    }
-    // console.log('random', random);
-    // console.log('cartList', cartList);
-    // console.log('recList', recList);
-    // console.log('recRandom', recRandom);
-
-    this.setState({
-      recRandom: recRandom
-    })
-    this.summary()
+    return random
   }
 
-  // async componentDidUpdate() {
-  // }
+  // 推荐菜单生成方法
+  getRecList = (array, list) => {
+    let recList = []
+    let rLenght = array.length
+    for (let i = 0; i < rLenght; i++) {
 
+      recList.push(list[array[i]])
 
+    }
+
+    return recList
+  }
 
   onDecrease = (newCount, id) => {
     --newCount
@@ -152,41 +188,51 @@ export default class Recommend extends Component {
 
   render() {
 
-    const { cartList, sumPrice, recRandom } = this.state
+    const { cartList, sumPrice, recList } = this.state
 
 
     return (
       <View>
         <ScrollView style='height: 1100rpx' scrollY>
-          <View className='selectedMenu'>
-            <Text className='selectedTitle'>已选以下菜品</Text>
-            <AtList>
-              {
-                cartList.map((item, index) => {
-                  return (
-                    <View key={index} style='position: relative'>
-                      <AtListItem
-                        title={item.name}
-                        note={`${item.price}元`}
-                        thumb={item.img}
-                      />
-                      <Add
-                        count={item.count}
-                        onDecrease={() => this.onDecrease(item.count, item.dishId)}
-                        onIncrease={() => this.onIncrease(item.count, item.dishId)}
-                      />
-                    </View>
 
-                  )
-                })
-              }
-            </AtList>
-          </View>
+          {
+            cartList.length === 0 &&
+            <View className='emptyHint'>您的购物车还是空的！</View>
+          }
+          {
+            cartList.length !== 0 &&
+            <View className='selectedMenu'>
+              <Text className='selectedTitle'>已选以下菜品</Text>
+              <AtList>
+                {
+                  cartList.map((item, index) => {
+                    return (
+                      <View key={index} style='position: relative'>
+                        <AtListItem
+                          title={item.name}
+                          note={`${item.price}元`}
+                          thumb={item.img}
+                        />
+                        <Add
+                          count={item.count}
+                          onDecrease={() => this.onDecrease(item.count, item.dishId)}
+                          onIncrease={() => this.onIncrease(item.count, item.dishId)}
+                        />
+                      </View>
+
+                    )
+                  })
+                }
+              </AtList>
+            </View>
+          }
+
+
           <View className='recommend'>
             <Text className='recTitle'>为您推荐</Text>
             <View className='reclist'>
               {
-                recRandom.map((item, index) => {
+                recList.map((item, index) => {
                   return (
                     <View className='recItem' key={index}>
                       <Image src={item.img} className='recImg' />
