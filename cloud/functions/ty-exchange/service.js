@@ -5,4 +5,6 @@ function createHash(hashLength) {
   ).join('');
 }
 
-module.exports = createHash(9)
+module.exports = function (hashLength) {
+  return createHash(hashLength)
+}

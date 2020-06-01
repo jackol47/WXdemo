@@ -1,6 +1,6 @@
 
 const cloud = require('wx-server-sdk');
-const createHash = require('./service')
+const gethashcode = require('./service')
 
 cloud.init({});
 
@@ -16,7 +16,7 @@ exports.main = async (event, context) => {
   const { OPENID } = wxContext;
   let sumPrice = 0
   let menuList = [];
-
+  let orderId = gethashcode()
   let buildDate
   
   for(let i = 0; i < menuIdList.length; i++) {
@@ -36,7 +36,7 @@ exports.main = async (event, context) => {
     menuList,
     note,
     sumPrice,
-    orderId: createHash,
+    orderId,
     status: '待付款'
   }
 

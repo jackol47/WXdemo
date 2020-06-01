@@ -1,5 +1,5 @@
 const cloud = require('wx-server-sdk');
-const createHash = require('./service')
+let createHash = require('./service')
 
 cloud.init({});
 
@@ -12,12 +12,12 @@ exports.main = async (event, context) => {
     const { commodityId } = event
     const wxContext = cloud.getWXContext(context);
     const { OPENID } = wxContext;
-    
+
     const { data } = await dish.where({ dish_id: _.eq(commodityId) }).get()
 
     const { price, name, img } = data[0]
     let integral = price * 10
-    
+
     let record = {
         uid: OPENID,
         name,
@@ -25,9 +25,10 @@ exports.main = async (event, context) => {
         img,
         integral,
         buildDate: new Date(),
-        recordId: createHash
+        recordId: createHash(9)
     }
 
-    const { errMsg } = await exchangeRecord.add({ data: { ...record} })
-    return { success: true, data, errMsg }
+    const { errMsg } = await exchangeRecord.add({ data: { ...record } })
+    const res = createHash(9)
+    return { success: true, data, errMsg, res }
 }

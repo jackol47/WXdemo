@@ -52,6 +52,11 @@ export default class Recommend extends Component {
   // 筛选方法
   filterUnSelecDish = (dishList, cartList) => {
 
+    // 判断购物车是否为空
+    if(cartList.length === 0){
+      return dishList.filter(item => item.type.indexOf('other'))
+    }
+
     // 筛选未选择的菜品
     dishList.forEach(item => {
       cartList.forEach(cartItem => {

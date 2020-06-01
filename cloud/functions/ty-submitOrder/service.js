@@ -55,4 +55,6 @@ function gethashcode() {
   return hashcode;
 }
 
-module.exports = gethashcode()
+module.exports = () => {
+  return  gethashcode()
+}

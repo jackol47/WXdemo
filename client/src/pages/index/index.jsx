@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Swiper, SwiperItem, Image, Button } from '@tarojs/components';
-import { login } from '@/utils/service'
+import { login, getRecentTime } from '@/utils/service'
 import SwOne from '@/img/sw1.jpg'
 import SwTwo from '@/img/sw2.jpg'
 import SwThree from '@/img/sw3.jpg'
@@ -12,8 +12,16 @@ export default class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogin: false
+      isLogin: false,
+      recentTime: ''
     };
+  }
+
+
+  async componentDidMount() {
+    const { recentOrder } = await getRecentTime()
+    const recentTime = new Date(recentOrder.buildDate).toLocaleString()
+    this.setState({recentTime: recentTime})
   }
 
   turnToMenuPage = () => {
@@ -35,15 +43,17 @@ export default class Index extends Component {
   }
 
   // 授权登录
-  handleGetUserInfo(e) {
+  async handleGetUserInfo(e) {
     console.log(e.detail.userInfo)
     const { avatarUrl, nickName } = e.detail.userInfo
-    login(avatarUrl, nickName)
+    const {uid} = await login(avatarUrl, nickName)
     this.setState(pre => ({ isLogin: !pre.isLogin }))
+    Taro.setStorage({key: 'uid', data: uid})
   }
 
   render() {
-    const { isLogin } = this.state
+    const { isLogin, recentTime } = this.state
+    console.log('recentTime', recentTime);
     return (
 
       <View>
@@ -87,6 +97,8 @@ export default class Index extends Component {
                 <Text>历史订单</Text>
               </View>
             </View>
+
+            <View className='recentTime'>最近就餐时间：{recentTime}</View>
           </View>
         }
 

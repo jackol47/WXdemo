@@ -70,4 +70,8 @@ export function changeStatus(orderId) {
   return request(param)
 }
 
-export default { login, getOrderForm, submitOrder, getDish, updatePoint, getUserInfo, exchange, getRecord, changeStatus };
+export function getRecentTime() {
+  return request({name: 'ty-getRecentTime'})
+}
+
+export default { login, getOrderForm, submitOrder, getDish, updatePoint, getUserInfo, exchange, getRecord, changeStatus, getRecentTime };
